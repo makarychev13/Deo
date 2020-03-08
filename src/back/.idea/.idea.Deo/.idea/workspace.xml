@@ -8,6 +8,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Infrastructure/Rss/Reader/IRssReader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Infrastructure/Rss/Parser/IRssParser.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Infrastructure/Rss/Reader/RssReader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Infrastructure/Rss/Parser/RssParser.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Infrastructure/Rss/Order.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Domain/Orders/Order.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Domain/Orders/ValueObjects/FreelanceBurse.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -15,7 +23,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Domain/Orders/ValueObjects/FreelanceBurse.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Class1.cs" />
         <option value="$PROJECT_DIR$/Domain/Orders/Order.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Rss/Parser/Order.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Rss/Order.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Rss/Parser/IRssParser.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Rss/Parser/RssParser.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Rss/Reader/IRssReader.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Rss/Reader/RssReader.cs" />
       </list>
     </option>
   </component>
@@ -28,20 +43,24 @@
   <component name="PropertiesComponent">
     <property name="Rider.SolutionExplorerActivator" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="CodeInspectionSettingsId" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="275" y="96" key="Rider.ProjectTemplateDialog.Size" timestamp="1583628350034">
+    <state x="275" y="96" key="Rider.ProjectTemplateDialog.Size" timestamp="1583631002691">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="96" key="Rider.ProjectTemplateDialog.Size/0.0.1366.728@0.0.1366.728" timestamp="1583628350034" />
-    <state x="313" y="47" key="RiderGenerateDialog" timestamp="1583629290808">
+    <state x="275" y="96" key="Rider.ProjectTemplateDialog.Size/0.0.1366.728@0.0.1366.728" timestamp="1583631002691" />
+    <state x="313" y="47" key="RiderGenerateDialog" timestamp="1583632605055">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="313" y="47" key="RiderGenerateDialog/0.0.1366.728@0.0.1366.728" timestamp="1583629290808" />
-    <state x="184" y="6" key="SettingsEditor" timestamp="1583629356022">
+    <state x="313" y="47" key="RiderGenerateDialog/0.0.1366.728@0.0.1366.728" timestamp="1583632605055" />
+    <state x="184" y="6" key="SettingsEditor" timestamp="1583631825190">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1583629356022" />
+    <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1583631825190" />
+    <state width="600" height="424" key="javadoc.popup" timestamp="1583632245346">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="600" height="424" key="javadoc.popup/0.0.1366.728@0.0.1366.728" timestamp="1583632245346" />
   </component>
 </project>

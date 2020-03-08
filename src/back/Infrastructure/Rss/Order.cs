@@ -1,7 +1,6 @@
 ﻿using System;
-using Domain.Orders.ValueObjects;
 
-namespace Domain.Orders
+namespace Infrastructure.Rss
 {
     public class Order
     {
@@ -10,15 +9,18 @@ namespace Domain.Orders
         public readonly Uri Link;
         public readonly DateTime Publication;
 
-        public readonly FreelanceBurse Burse;
-
-        public Order(string title, string description, Uri link, DateTime publication, FreelanceBurse burse)
+        public Order(string title, string description, Uri link, DateTime publication)
         {
             Title = title;
             Description = description;
             Link = link;
             Publication = publication;
-            Burse = burse;
         }
+        
+        public override int GetHashCode()
+            => Link.GetHashCode();
+
+        public override bool Equals(object? obj)
+            => obj?.GetHashCode() == GetHashCode();
     }
 }
