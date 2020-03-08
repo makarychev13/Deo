@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Infrastructure.Rss.Parser
+namespace Infrastructure.Orders.Rss.Parser
 {
     public class RssParser : IRssParser
     {

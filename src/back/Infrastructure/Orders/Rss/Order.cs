@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Infrastructure.Rss
+namespace Infrastructure.Orders.Rss
 {
     public class Order
     {

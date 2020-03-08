@@ -8,14 +8,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Infrastructure/Rss/Reader/IRssReader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/IRssReader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Infrastructure/Rss/Parser/IRssParser.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Infrastructure/Rss/Reader/RssReader.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Infrastructure/Rss/Parser/RssParser.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/IRssParser.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/RssReader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/RssParser.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Infrastructure/Rss/Order.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Order.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Domain/Orders/Order.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Domain/Orders/ValueObjects/FreelanceBurse.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -31,6 +31,11 @@
         <option value="$PROJECT_DIR$/Infrastructure/Rss/Parser/RssParser.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Rss/Reader/IRssReader.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Rss/Reader/RssReader.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/IRssReader.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Order.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/IRssParser.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/RssParser.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/RssReader.cs" />
       </list>
     </option>
   </component>

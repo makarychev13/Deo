@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Rss.Parser
+namespace Infrastructure.Orders.Rss.Parser
 {
     public interface IRssParser
     {

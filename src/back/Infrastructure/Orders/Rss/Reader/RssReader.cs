@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Infrastructure.Rss.Parser;
+using Infrastructure.Orders.Rss.Parser;
 
-namespace Infrastructure.Rss.Reader
+namespace Infrastructure.Orders.Rss.Reader
 {
     public class RssReader : IRssReader
     {
@@ -19,7 +19,7 @@ namespace Infrastructure.Rss.Reader
             _fileName = fileName;
         }
 
-        public Task<Order[]> GetNewOrdersAsync()
+        public Task HandleNewOrdersAsync()
         {
             throw new NotImplementedException();
         }

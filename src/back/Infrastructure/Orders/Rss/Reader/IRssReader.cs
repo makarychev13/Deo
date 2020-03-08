@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Rss.Reader
+namespace Infrastructure.Orders.Rss.Reader
 {
     public interface IRssReader
     {
-        Task<Order[]> GetNewOrdersAsync();
+        Task HandleNewOrdersAsync();
     }
 }
