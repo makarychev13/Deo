@@ -1,8 +1,9 @@
 ﻿using System;
+using Confluent.Kafka;
 
 namespace Infrastructure.Orders.Rss
 {
-    public class Order
+    public sealed class Order
     {
         public readonly string Title;
         public readonly string Description;

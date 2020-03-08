@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Infrastructure.Orders.Rss.Parser
 {
     public interface IRssParser
     {
-        Task<Order[]> GetFromAsync(Uri link);
+        List<Order> GetFrom(XDocument xml);
     }
 }

@@ -3,7 +3,7 @@ using Domain.Orders.ValueObjects;
 
 namespace Domain.Orders
 {
-    public class Order
+    public sealed class Order
     {
         public readonly string Title;
         public readonly string Description;

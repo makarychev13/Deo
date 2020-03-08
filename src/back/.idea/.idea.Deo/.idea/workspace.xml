@@ -10,32 +10,49 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/IRssReader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/DomainServices/Orders/OrdersService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/RssReader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Domain/Orders/Order.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Domain/Orders/ValueObjects/FreelanceBurse.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/86B7D7D7-F962-486A-ABF0-78314BCD6B96/5d/d5faa72e/IProducer`2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/IRssParser.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/RssReader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/RssParser.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Order.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Domain/Orders/Order.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Domain/Orders/ValueObjects/FreelanceBurse.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Domain/Orders/ValueObjects/FreelanceBurse.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Class1.cs" />
-        <option value="$PROJECT_DIR$/Domain/Orders/Order.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Rss/Parser/Order.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Rss/Order.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Rss/Parser/IRssParser.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Rss/Parser/RssParser.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Rss/Reader/IRssReader.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Rss/Reader/RssReader.cs" />
-        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/IRssReader.cs" />
-        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Order.cs" />
+        <option value="$PROJECT_DIR$/DomainServices/Class1.cs" />
+        <option value="$PROJECT_DIR$/Domain/Orders/Order.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/IRssParser.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/RssParser.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Order.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/IRssReader.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/RssReader.cs" />
+        <option value="$PROJECT_DIR$/DomainServices/Orders/OrdersService.cs" />
       </list>
     </option>
   </component>
@@ -51,21 +68,21 @@
     <property name="settings.editor.selected.configurable" value="CodeInspectionSettingsId" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="275" y="96" key="Rider.ProjectTemplateDialog.Size" timestamp="1583631002691">
+    <state x="275" y="96" key="Rider.ProjectTemplateDialog.Size" timestamp="1583664127873">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="96" key="Rider.ProjectTemplateDialog.Size/0.0.1366.728@0.0.1366.728" timestamp="1583631002691" />
-    <state x="313" y="47" key="RiderGenerateDialog" timestamp="1583632605055">
+    <state x="275" y="96" key="Rider.ProjectTemplateDialog.Size/0.0.1366.728@0.0.1366.728" timestamp="1583664127873" />
+    <state x="313" y="47" key="RiderGenerateDialog" timestamp="1583675341739">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="313" y="47" key="RiderGenerateDialog/0.0.1366.728@0.0.1366.728" timestamp="1583632605055" />
+    <state x="313" y="47" key="RiderGenerateDialog/0.0.1366.728@0.0.1366.728" timestamp="1583675341739" />
     <state x="184" y="6" key="SettingsEditor" timestamp="1583631825190">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1583631825190" />
-    <state width="600" height="424" key="javadoc.popup" timestamp="1583632245346">
+    <state width="600" height="423" key="javadoc.popup" timestamp="1583675536723">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="600" height="424" key="javadoc.popup/0.0.1366.728@0.0.1366.728" timestamp="1583632245346" />
+    <state width="600" height="423" key="javadoc.popup/0.0.1366.728@0.0.1366.728" timestamp="1583675536723" />
   </component>
 </project>
