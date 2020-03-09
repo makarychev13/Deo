@@ -8,31 +8,17 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/IRssReader.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/IOrdersReader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tests/Infrastructure/Orders/Rss/OrdersParserTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/DomainServices/Orders/OrdersService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/RssReader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/OrdersReader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/IOrdersParser.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Domain/Orders/Order.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Domain/Orders/ValueObjects/FreelanceBurse.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/86B7D7D7-F962-486A-ABF0-78314BCD6B96/5d/d5faa72e/IProducer`2.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/IRssParser.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/RssParser.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/OrdersParser.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Order.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Domain/Orders/Order.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/86B7D7D7-F962-486A-ABF0-78314BCD6B96/5d/d5faa72e/IProducer`2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Domain/Orders/ValueObjects/FreelanceBurse.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -47,12 +33,18 @@
         <option value="$PROJECT_DIR$/Infrastructure/Rss/Reader/RssReader.cs" />
         <option value="$PROJECT_DIR$/DomainServices/Class1.cs" />
         <option value="$PROJECT_DIR$/Domain/Orders/Order.cs" />
-        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/IRssParser.cs" />
-        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/RssParser.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Order.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/IRssReader.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/RssReader.cs" />
         <option value="$PROJECT_DIR$/DomainServices/Orders/OrdersService.cs" />
+        <option value="$PROJECT_DIR$/Tests/UnitTest1.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/IRssParser.cs" />
+        <option value="$PROJECT_DIR$/Tests/Infrastructure/RssParserTest.cs" />
+        <option value="$PROJECT_DIR$/Tests/Infrastructure/Orders/Rss/RssParserTest.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/RssParser.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/IOrdersParser.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/IOrdersReader.cs" />
+        <option value="$PROJECT_DIR$/Tests/Infrastructure/Orders/Rss/OrdersParserTest.cs" />
       </list>
     </option>
   </component>
@@ -68,21 +60,101 @@
     <property name="settings.editor.selected.configurable" value="CodeInspectionSettingsId" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="275" y="96" key="Rider.ProjectTemplateDialog.Size" timestamp="1583664127873">
+    <state width="1325" height="311" key="GridCell.Tab.0.bottom" timestamp="1583771577044">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="96" key="Rider.ProjectTemplateDialog.Size/0.0.1366.728@0.0.1366.728" timestamp="1583664127873" />
-    <state x="313" y="47" key="RiderGenerateDialog" timestamp="1583675341739">
+    <state width="1325" height="311" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583771577044" />
+    <state width="1325" height="311" key="GridCell.Tab.0.center" timestamp="1583771577044">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="313" y="47" key="RiderGenerateDialog/0.0.1366.728@0.0.1366.728" timestamp="1583675341739" />
+    <state width="1325" height="311" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1583771577044" />
+    <state width="1325" height="311" key="GridCell.Tab.0.left" timestamp="1583771577044">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1583771577044" />
+    <state width="1325" height="311" key="GridCell.Tab.0.right" timestamp="1583771577044">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1583771577044" />
+    <state width="1325" height="311" key="GridCell.Tab.1.bottom" timestamp="1583771577045">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583771577045" />
+    <state width="1325" height="311" key="GridCell.Tab.1.center" timestamp="1583771577044">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1583771577044" />
+    <state width="1325" height="311" key="GridCell.Tab.1.left" timestamp="1583771577044">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1583771577044" />
+    <state width="1325" height="311" key="GridCell.Tab.1.right" timestamp="1583771577044">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1583771577044" />
+    <state width="1325" height="311" key="GridCell.Tab.2.bottom" timestamp="1583771577045">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583771577045" />
+    <state width="1325" height="311" key="GridCell.Tab.2.center" timestamp="1583771577045">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1583771577045" />
+    <state width="1325" height="311" key="GridCell.Tab.2.left" timestamp="1583771577045">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1583771577045" />
+    <state width="1325" height="311" key="GridCell.Tab.2.right" timestamp="1583771577045">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1583771577045" />
+    <state width="1325" height="311" key="GridCell.Tab.3.bottom" timestamp="1583771577045">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.3.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583771577045" />
+    <state width="1325" height="311" key="GridCell.Tab.3.center" timestamp="1583771577045">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.3.center/0.0.1366.728@0.0.1366.728" timestamp="1583771577045" />
+    <state width="1325" height="311" key="GridCell.Tab.3.left" timestamp="1583771577045">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.3.left/0.0.1366.728@0.0.1366.728" timestamp="1583771577045" />
+    <state width="1325" height="311" key="GridCell.Tab.3.right" timestamp="1583771577045">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.3.right/0.0.1366.728@0.0.1366.728" timestamp="1583771577045" />
+    <state width="1325" height="311" key="GridCell.Tab.4.bottom" timestamp="1583771577045">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.4.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583771577045" />
+    <state width="1325" height="311" key="GridCell.Tab.4.center" timestamp="1583771577045">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.4.center/0.0.1366.728@0.0.1366.728" timestamp="1583771577045" />
+    <state width="1325" height="311" key="GridCell.Tab.4.left" timestamp="1583771577045">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.4.left/0.0.1366.728@0.0.1366.728" timestamp="1583771577045" />
+    <state width="1325" height="311" key="GridCell.Tab.4.right" timestamp="1583771577045">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1325" height="311" key="GridCell.Tab.4.right/0.0.1366.728@0.0.1366.728" timestamp="1583771577045" />
+    <state x="275" y="96" key="Rider.ProjectTemplateDialog.Size" timestamp="1583767545175">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="96" key="Rider.ProjectTemplateDialog.Size/0.0.1366.728@0.0.1366.728" timestamp="1583767545175" />
+    <state x="313" y="47" key="RiderGenerateDialog" timestamp="1583780044375">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="313" y="47" key="RiderGenerateDialog/0.0.1366.728@0.0.1366.728" timestamp="1583780044375" />
     <state x="184" y="6" key="SettingsEditor" timestamp="1583631825190">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1583631825190" />
-    <state width="600" height="423" key="javadoc.popup" timestamp="1583675536723">
+    <state width="600" height="423" key="javadoc.popup" timestamp="1583768718586">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="600" height="423" key="javadoc.popup/0.0.1366.728@0.0.1366.728" timestamp="1583675536723" />
+    <state width="600" height="423" key="javadoc.popup/0.0.1366.728@0.0.1366.728" timestamp="1583768718586" />
   </component>
 </project>

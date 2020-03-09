@@ -5,8 +5,9 @@ using System.Xml.Linq;
 
 namespace Infrastructure.Orders.Rss.Parser
 {
-    public interface IRssParser
+    public interface IOrdersParser
     {
         List<Order> GetFrom(XDocument xml);
+        XDocument ToXml(IEnumerable<Order> orders);
     }
 }

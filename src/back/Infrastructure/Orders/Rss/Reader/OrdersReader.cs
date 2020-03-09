@@ -9,20 +9,20 @@ using Infrastructure.Orders.Rss.Parser;
 
 namespace Infrastructure.Orders.Rss.Reader
 {
-    public class RssReader : IRssReader
+    public class OrdersReader : IOrdersReader
     {
         private readonly Uri _link;
-        private readonly IRssParser _parser;
+        private readonly IOrdersParser _parser;
         private readonly Uri _fileName;
 
-        public RssReader(Uri link, IRssParser parser, Uri fileName)
+        public OrdersReader(Uri link, IOrdersParser parser, Uri fileName)
         {
             _link = link;
             _parser = parser;
             _fileName = fileName;
         }
 
-        public async Task<Order[]> GetNewItemAsync()
+        public async Task<Order[]> GetNewAsync()
         {
             await Task.CompletedTask;
             var xml = XDocument.Load(_link.ToString());
@@ -36,12 +36,12 @@ namespace Infrastructure.Orders.Rss.Reader
             return orders.ToArray();
         }
 
-        public Task UpdateOldItems(IEnumerable<Order> oders)
+        public Task UpdateOld(IEnumerable<Order> oders)
         {
             throw new NotImplementedException();
         }
 
-        public Mutex GetProccesingLock()
+        public Mutex GetProccesLock()
         {
             return new Mutex(false, _fileName.ToString());
         }

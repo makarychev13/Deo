@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Orders.Rss.Reader
 {
-    public interface IRssReader
+    public interface IOrdersReader
     {
-        Task<Order[]> GetNewItemAsync();
-        Task UpdateOldItems(IEnumerable<Order> oders);
-        Mutex GetProccesingLock();
+        Task<Order[]> GetNewAsync();
+        Task UpdateOld(IEnumerable<Order> oders);
+        Mutex GetProccesLock();
     }
 }
