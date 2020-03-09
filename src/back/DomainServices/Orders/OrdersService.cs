@@ -20,7 +20,7 @@ namespace DomainServices.Orders
                 mutex.WaitOne(TimeSpan.FromMinutes(1));
                 var orders = await _reader.GetNewAsync();
                 //saveToKafka(orders)
-                await _reader.UpdateOld(orders);
+                _reader.UpdateOld(orders);
                 mutex.ReleaseMutex();
             }
         } 

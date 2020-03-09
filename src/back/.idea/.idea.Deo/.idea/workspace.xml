@@ -36,15 +36,16 @@
         <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Order.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/IRssReader.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/RssReader.cs" />
-        <option value="$PROJECT_DIR$/DomainServices/Orders/OrdersService.cs" />
         <option value="$PROJECT_DIR$/Tests/UnitTest1.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/IRssParser.cs" />
         <option value="$PROJECT_DIR$/Tests/Infrastructure/RssParserTest.cs" />
         <option value="$PROJECT_DIR$/Tests/Infrastructure/Orders/Rss/RssParserTest.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/RssParser.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/IOrdersParser.cs" />
-        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/IOrdersReader.cs" />
         <option value="$PROJECT_DIR$/Tests/Infrastructure/Orders/Rss/OrdersParserTest.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/OrdersReader.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/IOrdersReader.cs" />
+        <option value="$PROJECT_DIR$/DomainServices/Orders/OrdersService.cs" />
       </list>
     </option>
   </component>

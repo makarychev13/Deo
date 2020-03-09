@@ -36,9 +36,10 @@ namespace Infrastructure.Orders.Rss.Reader
             return orders.ToArray();
         }
 
-        public Task UpdateOld(IEnumerable<Order> oders)
+        public void UpdateOld(IEnumerable<Order> orders)
         {
-            throw new NotImplementedException();
+            var xml = _parser.ToXml(orders);
+            File.WriteAllText(_fileName.ToString(), xml.ToString());
         }
 
         public Mutex GetProccesLock()
