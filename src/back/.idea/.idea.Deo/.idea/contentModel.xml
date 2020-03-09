@@ -56,7 +56,6 @@
         <e p="Orders" t="Include">
           <e p="Kafka" t="Include">
             <e p="Consumers" t="Include" />
-            <e p="Producers" t="Include" />
           </e>
           <e p="Rss" t="Include">
             <e p="Order.cs" t="Include" />
