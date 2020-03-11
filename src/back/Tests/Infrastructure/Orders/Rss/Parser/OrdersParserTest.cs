@@ -5,7 +5,7 @@ using Infrastructure.Orders.Rss;
 using Infrastructure.Orders.Rss.Parser;
 using Xunit;
 
-namespace Tests.Infrastructure.Orders.Rss
+namespace Tests.Infrastructure.Orders.Rss.Parser
 {
     public class OrdersParserTest
     {

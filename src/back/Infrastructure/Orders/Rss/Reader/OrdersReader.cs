@@ -11,40 +11,56 @@ namespace Infrastructure.Orders.Rss.Reader
 {
     public class OrdersReader : IOrdersReader
     {
-        private readonly Uri _link;
         private readonly IOrdersParser _parser;
-        private readonly Uri _fileName;
+        private readonly Uri _link;
+        private readonly string _fileName;
 
-        public OrdersReader(Uri link, IOrdersParser parser, Uri fileName)
+        public OrdersReader(IOrdersParser parser, Uri link, string fileName)
         {
-            _link = link;
             _parser = parser;
+            _link = link;
             _fileName = fileName;
         }
 
-        public async Task<Order[]> GetNewAsync()
+        public async Task<Order[]> GetUnhandledAsync()
         {
             await Task.CompletedTask;
             var xml = XDocument.Load(_link.ToString());
             var orders = _parser.GetFrom(xml);
-            if (File.Exists(_fileName.Host))
+            if (File.Exists(_fileName))
             {
-                var oldOrders = _parser.GetFrom(XDocument.Load(_fileName.Host));
+                var oldOrders = _parser.GetFrom(XDocument.Load(_fileName));
                 orders = orders.Except(oldOrders.AsEnumerable()).ToList();
             }
 
             return orders.ToArray();
         }
 
-        public void UpdateOld(IEnumerable<Order> orders)
+        public void Handle(IEnumerable<Order> orders)
         {
-            var xml = _parser.ToXml(orders);
-            File.WriteAllText(_fileName.ToString(), xml.ToString());
+            var oldOrders = new List<Order>();
+            if (File.Exists(_fileName))
+            {
+                oldOrders = _parser.GetFrom(XDocument.Load(_fileName));
+                oldOrders.RemoveRange(oldOrders.Count - orders.Count() - 1, orders.Count());
+            }
+            var xml = _parser.ToXml(orders.Concat(oldOrders));
+            File.WriteAllText(_fileName, xml.ToString());
         }
 
         public Mutex GetProccesLock()
         {
-            return new Mutex(false, _fileName.ToString());
+            return new Mutex(false, _fileName);
+        }
+
+        public Order[] GetHandled()
+        {
+            if (!File.Exists(_fileName))
+            {
+                return Array.Empty<Order>();
+            }
+
+            return _parser.GetFrom(XDocument.Load(_fileName)).ToArray();
         }
     }
 }

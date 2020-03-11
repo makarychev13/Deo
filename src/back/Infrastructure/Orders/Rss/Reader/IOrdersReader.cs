@@ -7,8 +7,9 @@ namespace Infrastructure.Orders.Rss.Reader
 {
     public interface IOrdersReader
     {
-        Task<Order[]> GetNewAsync();
-        void UpdateOld(IEnumerable<Order> orders);
+        Task<Order[]> GetUnhandledAsync();
+        void Handle(IEnumerable<Order> orders);
+        Order[] GetHandled();
         Mutex GetProccesLock();
     }
 }

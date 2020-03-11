@@ -23,20 +23,20 @@ namespace DomainServices.Orders
             using (var mutex = _reader.GetProccesLock())
             {
                 mutex.WaitOne(TimeSpan.FromMinutes(1));
-                var orders = await _reader.GetNewAsync();
+                var orders = await _reader.GetUnhandledAsync();
                 foreach (var order in orders)
                 {
                     await _producer.ProduceAsync("orders", new Message<Null, Order>() { Value = null });
                 }
 
-                _reader.UpdateOld(orders);
+                _reader.Handle(orders);
                 mutex.ReleaseMutex();
             }
         }
 
         public void Dispose()
         {
-            _producer?.Dispose();
+            _producer.Dispose();
         }
     }
 }

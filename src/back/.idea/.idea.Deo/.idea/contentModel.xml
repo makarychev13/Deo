@@ -73,10 +73,20 @@
       <e p="packages" t="ExcludeRecursive" />
       <e p="Tests" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
+        <e p="Domain" t="Include">
+          <e p="Orders" t="Include">
+            <e p="OrderTest.cs" t="Include" />
+          </e>
+        </e>
         <e p="Infrastructure" t="Include">
           <e p="Orders" t="Include">
             <e p="Rss" t="Include">
-              <e p="OrdersParserTest.cs" t="Include" />
+              <e p="Parser" t="Include">
+                <e p="OrdersParserTest.cs" t="Include" />
+              </e>
+              <e p="Reader" t="Include">
+                <e p="OrdersReaderTest.cs" t="Include" />
+              </e>
             </e>
           </e>
         </e>
