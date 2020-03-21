@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Domain.Orders.ValueObjects;
 
 namespace Infrastructure.Orders.Rss.Parser
 {
     public interface IOrdersParser
     {
-        List<Order> GetFrom(XDocument xml);
-        XDocument ToXml(IEnumerable<Order> orders);
+        List<OrderBody> GetFrom(XDocument xml);
+        XDocument ToXml(IEnumerable<OrderBody> orders);
     }
 }

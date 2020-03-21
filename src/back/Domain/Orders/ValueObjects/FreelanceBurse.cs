@@ -2,7 +2,7 @@
 
 namespace Domain.Orders.ValueObjects
 {
-    public class FreelanceBurse
+    public sealed class FreelanceBurse
     {
         public readonly Uri Link;
         public readonly string Name;

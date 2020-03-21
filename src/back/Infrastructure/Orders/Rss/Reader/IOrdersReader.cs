@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Orders.ValueObjects;
 
 namespace Infrastructure.Orders.Rss.Reader
 {
     public interface IOrdersReader
     {
-        Task<Order[]> GetUnhandledAsync();
-        void Handle(IEnumerable<Order> orders);
-        Order[] GetHandled();
+        Task<OrderBody[]> GetUnhandledAsync();
+        void Handle(IEnumerable<OrderBody> orders);
+        OrderBody[] GetHandled();
         Mutex GetProccesLock();
     }
 }

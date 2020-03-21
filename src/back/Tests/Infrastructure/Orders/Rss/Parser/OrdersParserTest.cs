@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Xml.Linq;
-using Infrastructure.Orders.Rss;
+using Domain.Orders.ValueObjects;
 using Infrastructure.Orders.Rss.Parser;
 using Xunit;
 
@@ -33,11 +32,11 @@ namespace Tests.Infrastructure.Orders.Rss.Parser
         [Fact]
         public void ToXmlTest()
         {
-            var orders = new Order[]
+            var orders = new OrderBody[]
             {
-                new Order("title1", "description1", new Uri("https://ru.wikipedia.org/wiki"), DateTime.Now),
-                new Order("title2", "description2", new Uri("https://ru.wikipedia.org"), DateTime.Now.AddDays(1)),
-                new Order("title3", "description3", new Uri("https://ru.wikipedia.org"), DateTime.Now.AddDays(2)) 
+                new OrderBody("title1", "description1", new Uri("https://ru.wikipedia.org/wiki"), DateTime.Now),
+                new OrderBody("title2", "description2", new Uri("https://ru.wikipedia.org"), DateTime.Now.AddDays(1)),
+                new OrderBody("title3", "description3", new Uri("https://ru.wikipedia.org"), DateTime.Now.AddDays(2)) 
             };
             var xml = _parser.ToXml(orders);
             var parsedOrders = _parser.GetFrom(xml);

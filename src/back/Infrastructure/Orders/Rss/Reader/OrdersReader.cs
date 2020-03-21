@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Domain.Orders;
+using Domain.Orders.ValueObjects;
 using Infrastructure.Orders.Rss.Parser;
 
 namespace Infrastructure.Orders.Rss.Reader
@@ -22,7 +24,7 @@ namespace Infrastructure.Orders.Rss.Reader
             _fileName = fileName;
         }
 
-        public async Task<Order[]> GetUnhandledAsync()
+        public async Task<OrderBody[]> GetUnhandledAsync()
         {
             await Task.CompletedTask;
             var xml = XDocument.Load(_link.ToString());
@@ -36,9 +38,9 @@ namespace Infrastructure.Orders.Rss.Reader
             return orders.ToArray();
         }
 
-        public void Handle(IEnumerable<Order> orders)
+        public void Handle(IEnumerable<OrderBody> orders)
         {
-            var oldOrders = new List<Order>();
+            var oldOrders = new List<OrderBody>();
             if (File.Exists(_fileName))
             {
                 oldOrders = _parser.GetFrom(XDocument.Load(_fileName));
@@ -53,11 +55,11 @@ namespace Infrastructure.Orders.Rss.Reader
             return new Mutex(false, _fileName);
         }
 
-        public Order[] GetHandled()
+        public OrderBody[] GetHandled()
         {
             if (!File.Exists(_fileName))
             {
-                return Array.Empty<Order>();
+                return Array.Empty<OrderBody>();
             }
 
             return _parser.GetFrom(XDocument.Load(_fileName)).ToArray();

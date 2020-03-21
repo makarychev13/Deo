@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using Infrastructure.Orders.Rss;
+using Domain.Orders.ValueObjects;
 using Infrastructure.Orders.Rss.Parser;
 using Infrastructure.Orders.Rss.Reader;
 using Xunit;
@@ -14,6 +13,7 @@ namespace Tests.Infrastructure.Orders.Rss.Reader
     public class OrdersReaderTest
     {
         private const string fileName = "test.xml";
+        
         private readonly IOrdersReader _reader;
         private readonly IOrdersParser _parser;
 
@@ -36,14 +36,14 @@ namespace Tests.Infrastructure.Orders.Rss.Reader
             var unhandledOrders = await _reader.GetUnhandledAsync();
             _reader.Handle(unhandledOrders);
 
-            var newOrders = new List<Order>()
+            var newOrders = new List<OrderBody>()
             {
-                new Order(
+                new OrderBody(
                     "title1",
                     "description1",
                     new Uri("https://freelance.ru/rss/projects.xml"),
                     DateTime.Now),
-                new Order(
+                new OrderBody(
                     "title2",
                     "description2",
                     new Uri("https://freelance.ru/rss"),

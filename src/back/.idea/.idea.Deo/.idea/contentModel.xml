@@ -26,6 +26,7 @@
           <e p="Order.cs" t="Include" />
           <e p="ValueObjects" t="Include">
             <e p="FreelanceBurse.cs" t="Include" />
+            <e p="OrderBody.cs" t="Include" />
           </e>
         </e>
       </e>
@@ -58,7 +59,6 @@
             <e p="Consumers" t="Include" />
           </e>
           <e p="Rss" t="Include">
-            <e p="Order.cs" t="Include" />
             <e p="Parser" t="Include">
               <e p="IOrdersParser.cs" t="Include" />
               <e p="OrdersParser.cs" t="Include" />
@@ -75,7 +75,9 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="Domain" t="Include">
           <e p="Orders" t="Include">
-            <e p="OrderTest.cs" t="Include" />
+            <e p="ValueObjects" t="Include">
+              <e p="OrderTest.cs" t="Include" />
+            </e>
           </e>
         </e>
         <e p="Infrastructure" t="Include">

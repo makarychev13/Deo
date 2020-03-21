@@ -10,27 +10,21 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/IOrdersReader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/DomainServices/Orders/OrdersService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Tests/Domain/Orders/OrderTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tests/Domain/Orders/ValueObjects/OrderTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/OrdersReader.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Domain/Orders/ValueObjects/OrderBody.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/86B7D7D7-F962-486A-ABF0-78314BCD6B96/5d/d5faa72e/IProducer`2.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Infrastructure/Orders/Rss/Parser/OrdersParserTest.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/IOrdersParser.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/OrdersParser.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Infrastructure/Orders/Rss/Order.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/F34FC0E2-CDBB-4823-80DE-9E5BDF1189B3/9/Uri.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Domain/Orders/Order.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Infrastructure/Orders/Rss/Reader/OrdersReaderTest.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Domain/Orders/ValueObjects/FreelanceBurse.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Domain/Orders/ValueObjects/FreelanceBurse.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Class1.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Rss/Parser/Order.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Rss/Order.cs" />
@@ -39,7 +33,6 @@
         <option value="$PROJECT_DIR$/Infrastructure/Rss/Reader/IRssReader.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Rss/Reader/RssReader.cs" />
         <option value="$PROJECT_DIR$/DomainServices/Class1.cs" />
-        <option value="$PROJECT_DIR$/Domain/Orders/Order.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/IRssReader.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/RssReader.cs" />
         <option value="$PROJECT_DIR$/Tests/UnitTest1.cs" />
@@ -47,16 +40,21 @@
         <option value="$PROJECT_DIR$/Tests/Infrastructure/RssParserTest.cs" />
         <option value="$PROJECT_DIR$/Tests/Infrastructure/Orders/Rss/RssParserTest.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/RssParser.cs" />
-        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/IOrdersParser.cs" />
         <option value="$PROJECT_DIR$/Tests/Infrastructure/Orders/Rss/OrdersParserTest.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Orders/Kafka/Producers/IOrdersProducer.cs" />
         <option value="$PROJECT_DIR$/DomainServices/Orders/OrdersService.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Order.cs" />
-        <option value="$PROJECT_DIR$/Tests/Infrastructure/Orders/Rss/Parser/OrdersParserTest.cs" />
-        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/OrdersReader.cs" />
-        <option value="$PROJECT_DIR$/Tests/Infrastructure/Orders/Rss/Reader/OrdersReaderTest.cs" />
-        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/IOrdersReader.cs" />
         <option value="$PROJECT_DIR$/Tests/Domain/Orders/OrderTest.cs" />
+        <option value="$PROJECT_DIR$/Domain/Orders/ValueObjects/FreelanceBurse.cs" />
+        <option value="$PROJECT_DIR$/Domain/Orders/Order.cs" />
+        <option value="$PROJECT_DIR$/Domain/Orders/ValueObjects/OrderBody.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/IOrdersParser.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Parser/OrdersParser.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/IOrdersReader.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/Orders/Rss/Reader/OrdersReader.cs" />
+        <option value="$PROJECT_DIR$/Tests/Domain/Orders/ValueObjects/OrderTest.cs" />
+        <option value="$PROJECT_DIR$/Tests/Infrastructure/Orders/Rss/Parser/OrdersParserTest.cs" />
+        <option value="$PROJECT_DIR$/Tests/Infrastructure/Orders/Rss/Reader/OrdersReaderTest.cs" />
       </list>
     </option>
   </component>
@@ -76,102 +74,102 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="508" height="466" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1583953057476" />
-    <state width="1325" height="260" key="GridCell.Tab.0.bottom" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.0.bottom" timestamp="1583964450299">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.0.center" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583964450299" />
+    <state width="1325" height="260" key="GridCell.Tab.0.center" timestamp="1583964450298">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.0.left" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1583964450298" />
+    <state width="1325" height="260" key="GridCell.Tab.0.left" timestamp="1583964450286">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.0.right" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1583964450286" />
+    <state width="1325" height="260" key="GridCell.Tab.0.right" timestamp="1583964450298">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.1.bottom" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1583964450298" />
+    <state width="1325" height="260" key="GridCell.Tab.1.bottom" timestamp="1583964450300">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.1.center" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583964450300" />
+    <state width="1325" height="260" key="GridCell.Tab.1.center" timestamp="1583964450300">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.1.left" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1583964450300" />
+    <state width="1325" height="260" key="GridCell.Tab.1.left" timestamp="1583964450299">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.1.right" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1583964450299" />
+    <state width="1325" height="260" key="GridCell.Tab.1.right" timestamp="1583964450300">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.2.bottom" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1583964450300" />
+    <state width="1325" height="260" key="GridCell.Tab.2.bottom" timestamp="1583964450301">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.2.center" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583964450301" />
+    <state width="1325" height="260" key="GridCell.Tab.2.center" timestamp="1583964450301">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.2.left" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1583964450301" />
+    <state width="1325" height="260" key="GridCell.Tab.2.left" timestamp="1583964450301">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.2.right" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1583964450301" />
+    <state width="1325" height="260" key="GridCell.Tab.2.right" timestamp="1583964450301">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.3.bottom" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1583964450301" />
+    <state width="1325" height="260" key="GridCell.Tab.3.bottom" timestamp="1583964450303">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.3.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.3.center" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.3.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583964450303" />
+    <state width="1325" height="260" key="GridCell.Tab.3.center" timestamp="1583964450302">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.3.center/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.3.left" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.3.center/0.0.1366.728@0.0.1366.728" timestamp="1583964450302" />
+    <state width="1325" height="260" key="GridCell.Tab.3.left" timestamp="1583964450302">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.3.left/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.3.right" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.3.left/0.0.1366.728@0.0.1366.728" timestamp="1583964450302" />
+    <state width="1325" height="260" key="GridCell.Tab.3.right" timestamp="1583964450303">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.3.right/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.4.bottom" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.3.right/0.0.1366.728@0.0.1366.728" timestamp="1583964450303" />
+    <state width="1325" height="260" key="GridCell.Tab.4.bottom" timestamp="1583964450312">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.4.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.4.center" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.4.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583964450312" />
+    <state width="1325" height="260" key="GridCell.Tab.4.center" timestamp="1583964450312">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.4.center/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.4.left" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.4.center/0.0.1366.728@0.0.1366.728" timestamp="1583964450312" />
+    <state width="1325" height="260" key="GridCell.Tab.4.left" timestamp="1583964450312">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.4.left/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
-    <state width="1325" height="260" key="GridCell.Tab.4.right" timestamp="1583953839161">
+    <state width="1325" height="260" key="GridCell.Tab.4.left/0.0.1366.728@0.0.1366.728" timestamp="1583964450312" />
+    <state width="1325" height="260" key="GridCell.Tab.4.right" timestamp="1583964450312">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1325" height="260" key="GridCell.Tab.4.right/0.0.1366.728@0.0.1366.728" timestamp="1583953839161" />
+    <state width="1325" height="260" key="GridCell.Tab.4.right/0.0.1366.728@0.0.1366.728" timestamp="1583964450312" />
     <state x="275" y="96" key="Rider.ProjectTemplateDialog.Size" timestamp="1583767545175">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="96" key="Rider.ProjectTemplateDialog.Size/0.0.1366.728@0.0.1366.728" timestamp="1583767545175" />
-    <state x="313" y="47" key="RiderGenerateDialog" timestamp="1583868509033">
+    <state x="313" y="47" key="RiderGenerateDialog" timestamp="1584506869106">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="313" y="47" key="RiderGenerateDialog/0.0.1366.728@0.0.1366.728" timestamp="1583868509033" />
+    <state x="313" y="47" key="RiderGenerateDialog/0.0.1366.728@0.0.1366.728" timestamp="1584506869106" />
     <state x="184" y="6" key="SettingsEditor" timestamp="1583949851048">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1583949851048" />
-    <state width="600" height="424" key="javadoc.popup" timestamp="1583950406254">
+    <state width="600" height="424" key="javadoc.popup" timestamp="1583960290199">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="600" height="424" key="javadoc.popup/0.0.1366.728@0.0.1366.728" timestamp="1583950406254" />
+    <state width="600" height="424" key="javadoc.popup/0.0.1366.728@0.0.1366.728" timestamp="1583960290199" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1583954174070">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

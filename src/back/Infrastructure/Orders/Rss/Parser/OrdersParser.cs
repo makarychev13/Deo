@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Xml.Linq;
+using Domain.Orders;
+using Domain.Orders.ValueObjects;
 
 namespace Infrastructure.Orders.Rss.Parser
 {
     public class OrdersParser : IOrdersParser
     {
-        public List<Order> GetFrom(XDocument xml)
+        public List<OrderBody> GetFrom(XDocument xml)
         {
             return xml.Elements("rss").Elements().Elements("item")
-                .Select(p => new Order(
+                .Select(p => new OrderBody(
                     p.Element("title").Value,
                     p.Element("description").Value,
                     new Uri(p.Element("link").Value),
@@ -19,7 +20,7 @@ namespace Infrastructure.Orders.Rss.Parser
                 .ToList();
         }
 
-        public XDocument ToXml(IEnumerable<Order> orders)
+        public XDocument ToXml(IEnumerable<OrderBody> orders)
         {
             var channel = new XElement("channel");
             foreach (var order in orders)
