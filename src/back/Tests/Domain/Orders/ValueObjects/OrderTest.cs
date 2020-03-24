@@ -1,5 +1,7 @@
 ﻿using System;
+
 using Domain.Orders.ValueObjects;
+
 using Xunit;
 
 namespace Tests.Domain.Orders.ValueObjects

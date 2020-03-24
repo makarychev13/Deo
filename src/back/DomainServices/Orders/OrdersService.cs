@@ -1,16 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
+
 using Confluent.Kafka;
+
 using Domain.Orders;
+using Domain.Orders.ValueObjects;
+
 using Infrastructure.Orders.Rss.Reader;
 
 namespace DomainServices.Orders
 {
     public sealed class OrdersService : IDisposable
     {
-        private readonly IOrdersReader _reader;
         private readonly IProducer<Null, Order> _producer;
+        private readonly IOrdersReader _reader;
 
         public OrdersService(IOrdersReader reader, IProducer<Null, Order> producer)
         {
@@ -18,25 +22,26 @@ namespace DomainServices.Orders
             _producer = producer;
         }
 
+        public void Dispose()
+        {
+            _producer.Dispose();
+        }
+
         public async Task HandleOrdersAsync()
         {
-            using (var mutex = _reader.GetProccesLock())
+            using (Mutex mutex = _reader.GetProccesLock())
             {
                 mutex.WaitOne(TimeSpan.FromMinutes(1));
-                var orders = await _reader.GetUnhandledAsync();
-                foreach (var order in orders)
+                OrderBody[] orders = await _reader.GetUnhandledAsync();
+
+                foreach (OrderBody order in orders)
                 {
-                    await _producer.ProduceAsync("orders", new Message<Null, Order>() { Value = null });
+                    await _producer.ProduceAsync("orders", new Message<Null, Order> { Value = null });
                 }
 
                 _reader.Handle(orders);
                 mutex.ReleaseMutex();
             }
-        }
-
-        public void Dispose()
-        {
-            _producer.Dispose();
         }
     }
 }

@@ -4,10 +4,10 @@ namespace Domain.Orders.ValueObjects
 {
     public sealed class OrderBody
     {
-        public readonly string Title;
         public readonly string Description;
         public readonly Uri Link;
         public readonly DateTime Publication;
+        public readonly string Title;
 
         public OrderBody(string title, string description, Uri link, DateTime publication)
         {
