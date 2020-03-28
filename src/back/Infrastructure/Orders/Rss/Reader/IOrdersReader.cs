@@ -11,6 +11,5 @@ namespace Infrastructure.Orders.Rss.Reader
         Task<OrderBody[]> GetUnhandledAsync();
         void Handle(IEnumerable<OrderBody> orders);
         OrderBody[] GetHandled();
-        Mutex GetProccesLock();
     }
 }

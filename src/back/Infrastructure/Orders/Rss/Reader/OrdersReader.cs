@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 
 using Domain.Orders.ValueObjects;
@@ -30,7 +32,6 @@ namespace Infrastructure.Orders.Rss.Reader
             await Task.CompletedTask;
             XDocument xml = XDocument.Load(_link.ToString());
             List<OrderBody> orders = _parser.GetFrom(xml);
-
             if (File.Exists(_fileName))
             {
                 List<OrderBody> oldOrders = _parser.GetFrom(XDocument.Load(_fileName));
@@ -52,11 +53,6 @@ namespace Infrastructure.Orders.Rss.Reader
 
             XDocument xml = _parser.ToXml(orders.Concat(oldOrders));
             File.WriteAllText(_fileName, xml.ToString());
-        }
-
-        public Mutex GetProccesLock()
-        {
-            return new Mutex(false, _fileName);
         }
 
         public OrderBody[] GetHandled()
