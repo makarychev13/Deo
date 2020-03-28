@@ -20,7 +20,7 @@ namespace Tests.Infrastructure.Orders.Rss.Reader
             _parser = new OrdersParser();
             _reader = new OrdersReader(
                 _parser,
-                new Uri("https://freelance.ru/rss/projects.xml"),
+                new FreelanceBurse(new Uri("https://freelance.ru/rss/projects.xml"), "test"),
                 fileName);
         }
 

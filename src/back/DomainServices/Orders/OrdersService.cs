@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Confluent.Kafka;
 using Domain.Orders;
 using Domain.Orders.ValueObjects;
 using Infrastructure.Common.Kafka;
@@ -47,8 +46,7 @@ namespace DomainServices.Orders
 
             foreach (OrderBody body in orders)
             {
-                var source = new FreelanceBurse(new Uri("https://freelance.ru/rss/projects.xml"), "freelance.ru"); 
-                var order = new Order(body, source);
+                var order = new Order(body, _reader.Burse);
                 await _producer.ProduceAsync(order.Source.Name, order);
             }
 

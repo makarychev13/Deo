@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Confluent.Kafka;
 using Domain.Orders;
+using Domain.Orders.ValueObjects;
 using DomainServices.Orders;
 using Infrastructure.Common.Kafka;
 using Infrastructure.Orders.Rss.Parser;
@@ -33,10 +34,9 @@ namespace Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSingleton<IOrdersReader>(new OrdersReader(
-                new OrdersParser(),
-                new Uri("https://freelance.ru/rss/projects.xml"), "freelance.ru"));
-            services.AddHostedService<OrdersService>();
+            services.AddOrdersService(new FreelanceBurse(new Uri("https://kwork.ru/rss"), "kwork"), "kwork");
+            services.AddOrdersService(new FreelanceBurse(new Uri("https://freelance.ru/rss/projects.xml"), "freelance.ru"), "freelance");
+            services.AddOrdersService(new FreelanceBurse(new Uri("https://freelance.habr.com/rss/tasks"), "freelance.habr"), "habr");
             services
                 .AddKafkaConfigs(new ProducerConfig() {BootstrapServers = "localhost:9092"})
                 .AddKafkaProducer<string, Order>("orders");

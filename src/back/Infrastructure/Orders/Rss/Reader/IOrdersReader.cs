@@ -8,6 +8,8 @@ namespace Infrastructure.Orders.Rss.Reader
 {
     public interface IOrdersReader
     {
+        FreelanceBurse Burse { get; }
+        
         Task<OrderBody[]> GetUnhandledAsync();
         void Handle(IEnumerable<OrderBody> orders);
         OrderBody[] GetHandled();

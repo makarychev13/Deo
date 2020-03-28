@@ -16,21 +16,21 @@ namespace Infrastructure.Orders.Rss.Reader
 {
     public class OrdersReader : IOrdersReader
     {
+        public FreelanceBurse Burse { get; }
         private readonly string _fileName;
-        private readonly Uri _link;
         private readonly IOrdersParser _parser;
 
-        public OrdersReader(IOrdersParser parser, Uri link, string fileName)
+        public OrdersReader(IOrdersParser parser, FreelanceBurse burse, string fileName)
         {
             _parser = parser;
-            _link = link;
+            Burse = burse;
             _fileName = fileName;
         }
 
         public async Task<OrderBody[]> GetUnhandledAsync()
         {
             await Task.CompletedTask;
-            XDocument xml = XDocument.Load(_link.ToString());
+            XDocument xml = XDocument.Load(Burse.Link.ToString());
             List<OrderBody> orders = _parser.GetFrom(xml);
             if (File.Exists(_fileName))
             {
