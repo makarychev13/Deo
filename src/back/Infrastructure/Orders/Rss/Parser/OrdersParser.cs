@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-
 using Domain.Orders.ValueObjects;
 
 namespace Infrastructure.Orders.Rss.Parser
@@ -27,7 +26,7 @@ namespace Infrastructure.Orders.Rss.Parser
         {
             var channel = new XElement("channel");
 
-            foreach (OrderBody order in orders)
+            foreach (var order in orders)
             {
                 var item = new XElement("item");
                 item.Add(new XElement("title", order.Title));

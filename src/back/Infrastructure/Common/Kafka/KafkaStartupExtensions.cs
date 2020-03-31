@@ -5,13 +5,14 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class KafkaStartupExtensions
     {
-        public static IServiceCollection AddKafkaConfigs(this IServiceCollection services, ProducerConfig producerConfig)
+        public static IServiceCollection AddKafkaConfigs(this IServiceCollection services,
+            ProducerConfig producerConfig)
         {
             services.AddSingleton(producerConfig);
 
             return services;
         }
-        
+
         public static IServiceCollection AddKafkaProducer<Tk, Tv>(this IServiceCollection services, string topic)
         {
             services.AddSingleton(sp =>

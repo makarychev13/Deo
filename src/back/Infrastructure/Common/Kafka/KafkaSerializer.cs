@@ -8,15 +8,10 @@ namespace Infrastructure.Common.Kafka
     {
         public byte[] Serialize(T data, SerializationContext context)
         {
-            if (typeof(T) == typeof(Null))
-            {
-                return null;
-            }
+            if (typeof(T) == typeof(Null)) return null;
 
             if (typeof(T) == typeof(Ignore))
-            {
                 throw new NotSupportedException("Невозможно сериализовать тип Ignore для получения значения выражения");
-            }
 
             return JsonSerializer.Serialize(data);
         }
