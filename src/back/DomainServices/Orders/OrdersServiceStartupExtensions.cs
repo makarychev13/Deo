@@ -1,8 +1,7 @@
-using System;
+using Common.Kafka.Producer;
 using Domain.Orders;
 using Domain.Orders.ValueObjects;
 using DomainServices.Orders;
-using Infrastructure.Common.Kafka;
 using Infrastructure.Orders.Rss.Parser;
 using Infrastructure.Orders.Rss.Reader;
 using Microsoft.Extensions.Hosting;

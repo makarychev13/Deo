@@ -2,7 +2,7 @@ using System;
 using Confluent.Kafka;
 using Utf8Json;
 
-namespace Infrastructure.Common.Kafka
+namespace Common.Kafka
 {
     public sealed class KafkaSerializer<T> : ISerializer<T>
     {

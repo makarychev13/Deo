@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Confluent.Kafka;
 using Microsoft.Extensions.Options;
 
-namespace Infrastructure.Common.Kafka
+namespace Common.Kafka.Producer
 {
     public sealed class KafkaProducer<Tk, Tv> : IDisposable
     {

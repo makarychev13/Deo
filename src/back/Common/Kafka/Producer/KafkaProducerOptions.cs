@@ -1,4 +1,4 @@
-namespace Infrastructure.Common.Kafka
+namespace Common.Kafka.Producer
 {
     public sealed class KafkaProducerOptions
     {

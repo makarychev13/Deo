@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Common.Kafka.Producer;
 using Domain.Orders;
 using Domain.Orders.ValueObjects;
-using Infrastructure.Common.Kafka;
 using Infrastructure.Orders.Rss.Reader;
 using Microsoft.Extensions.Hosting;
 

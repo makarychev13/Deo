@@ -1,5 +1,6 @@
+using Common.Kafka;
+using Common.Kafka.Producer;
 using Confluent.Kafka;
-using Infrastructure.Common.Kafka;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

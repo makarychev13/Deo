@@ -11,6 +11,8 @@ namespace Infrastructure.Orders.Rss.Reader
 {
     public class OrdersReader : IOrdersReader
     {
+        public FreelanceBurse Burse { get; }
+
         private readonly string _fileName;
         private readonly IOrdersParser _parser;
 
@@ -20,9 +22,7 @@ namespace Infrastructure.Orders.Rss.Reader
             Burse = burse;
             _fileName = fileName;
         }
-
-        public FreelanceBurse Burse { get; }
-
+        
         public async Task<OrderBody[]> GetUnhandledAsync()
         {
             await Task.CompletedTask;
