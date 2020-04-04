@@ -14,7 +14,7 @@ namespace DomainServices.Orders
         private readonly KafkaProducer<string, Order> _producer;
         private readonly IOrdersReader _reader;
         
-        private Timer _timer;
+        private Timer? _timer;
 
         public OrdersService(IOrdersReader reader, KafkaProducer<string, Order> producer)
         {
@@ -30,13 +30,13 @@ namespace DomainServices.Orders
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            _timer.Change(Timeout.Infinite, 0);
+            _timer?.Change(Timeout.Infinite, 0);
             return Task.CompletedTask;
         }
         
         public void Dispose()
         {
-            _timer.Dispose();
+            _timer?.Dispose();
             _producer.Dispose();
         }
         

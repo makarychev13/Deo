@@ -6,9 +6,11 @@ using Domain.Orders.ValueObjects;
 using Infrastructure.Orders.Kafka;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Migrations;
 
 namespace Presentation
 {
@@ -40,6 +42,7 @@ namespace Presentation
                         Topic = "orders",
                         Config = new ConsumerConfig {GroupId = "dev_1", BootstrapServers = "localhost:9092"}
                     }));
+            services.AddDbContext<Context>(options => options.UseNpgsql("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
