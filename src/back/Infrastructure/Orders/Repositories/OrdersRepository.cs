@@ -35,7 +35,7 @@ namespace Infrastructure.Orders.Repositories
                     link = p.Body.Link.ToString(),
                     publication = p.Body.Publication,
                     freelanceBurseId,
-                    status = ProcessingStatus.New
+                    status = ProcessingStatus.New.ToString()
                 }));
             }
         }
