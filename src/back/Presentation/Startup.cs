@@ -1,5 +1,6 @@
 using System;
 using Common.Kafka.Consumer;
+using Common.Repositories;
 using Confluent.Kafka;
 using Domain.Orders;
 using Domain.Orders.ValueObjects;
@@ -27,11 +28,6 @@ namespace Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddOrdersService(new FreelanceBurse(new Uri("https://kwork.ru/rss"), "kwork"), "kwork");
-            services.AddOrdersService(
-                new FreelanceBurse(new Uri("https://freelance.ru/rss/projects.xml"), "freelance.ru"), "freelance");
-            services.AddOrdersService(
-                new FreelanceBurse(new Uri("https://freelance.habr.com/rss/tasks"), "freelance.habr"), "habr");
             services
                 .AddKafkaConfigs(new ProducerConfig() {BootstrapServers = "localhost:9092"})
                 .AddKafkaProducer<string, Order>("orders");
@@ -43,6 +39,8 @@ namespace Presentation
                         Config = new ConsumerConfig {GroupId = "dev_1", BootstrapServers = "localhost:9092"}
                     }));
             services.AddDbContext<Context>(options => options.UseNpgsql("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A"));
+            services.AddSingleton<ISqlConnectionFactory>(p =>
+                new SqlConnectionFactory("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
