@@ -25,7 +25,8 @@ namespace Infrastructure.Orders.Repositories
                 string query = $@"
                     insert into ""Orders""
                     (""Title"", ""Description"", ""Link"", ""Publication"", ""FreelanceBurseId"", ""Status"")
-                    values(@title, @description, @link, @publication, @freelanceBurseId, @status)";
+                    values(@title, @description, @link, @publication, @freelanceBurseId, @status)
+                    on conflict (""Link"") do nothing";
 
                 await connection.ExecuteAsync(query, orders.Select(p => new
                 {

@@ -34,5 +34,6 @@ namespace DomainServices.Orders.Hosted
                 await _ordersRepository.MergePulledOrdersAsync(orders, burse.Id);
             }
         }
+        
     }
 }

@@ -14,6 +14,7 @@ namespace Migrations.Tables.Orders
             
             builder.Property(p => p.Title).IsRequired();
             builder.Property(p => p.Description).IsRequired();
+            builder.HasIndex(p => p.Link).IsUnique();
             builder.Property(p => p.Link).IsRequired();
             builder.Property(p => p.Publication).IsRequired();
             builder.Property(p => p.Status)
@@ -22,6 +23,7 @@ namespace Migrations.Tables.Orders
                     p => p.ToString(),
                     p => (ProcessingStatus)Enum.Parse(typeof(ProcessingStatus), p));
             builder.Property(p => p.FreelanceBurseId).IsRequired();
+            
             builder
                 .HasOne(p => p.FreelanceBurse)
                 .WithMany(p => p.Orders)
