@@ -4,7 +4,11 @@ using Common.Repositories;
 using Confluent.Kafka;
 using Domain.Orders;
 using Domain.Orders.ValueObjects;
+using DomainServices.Orders.Hosted;
 using Infrastructure.Orders.Kafka;
+using Infrastructure.Orders.Repositories;
+using Infrastructure.Orders.Rss.Parser;
+using Infrastructure.Orders.Rss.Reader;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +32,11 @@ namespace Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton<IOrdersParser, OrdersParser>();
+            services.AddSingleton<IOrdersReader, OrdersReader>();
+            services.AddSingleton<OrdersRepository>();
+            services.AddSingleton<FreelanceBursesRepository>();
+            services.AddHostedService<PullUnhandledOrders>();
             services
                 .AddKafkaConfigs(new ProducerConfig() {BootstrapServers = "localhost:9092"})
                 .AddKafkaProducer<string, Order>("orders");
@@ -38,9 +47,10 @@ namespace Presentation
                         Topic = "orders",
                         Config = new ConsumerConfig {GroupId = "dev_1", BootstrapServers = "localhost:9092"}
                     }));
-            services.AddDbContext<Context>(options => options.UseNpgsql("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A"));
-            services.AddSingleton<ISqlConnectionFactory>(p =>
-                new SqlConnectionFactory("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A"));
+            services.AddDbContext<Context>(
+                options => options.UseNpgsql("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A"));
+            services.AddSingleton<ISqlConnectionFactory>(
+                p => new SqlConnectionFactory("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

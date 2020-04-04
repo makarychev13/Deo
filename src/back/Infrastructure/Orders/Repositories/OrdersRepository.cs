@@ -18,7 +18,7 @@ namespace Infrastructure.Orders.Repositories
             _connectionFactory = connectionFactory;
         }
 
-        public async Task MergeOrdersAsync(IEnumerable<Order> orders, int freelanceBurseId)
+        public async Task MergePulledOrdersAsync(IEnumerable<Order> orders, int freelanceBurseId)
         {
             using (IDbConnection connection = _connectionFactory.BuildConnection())
             {

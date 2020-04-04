@@ -22,7 +22,7 @@ namespace Tests.Infrastructure.Orders.Rss.Parser
         [Fact]
         public void GetFromTest()
         {
-            List<OrderBody> orders = _parser.GetFrom(XDocument.Load("https://freelance.ru/rss/projects.xml"));
+            OrderBody[] orders = _parser.GetFrom(XDocument.Load("https://freelance.ru/rss/projects.xml"));
 
             Assert.NotEmpty(orders);
             Assert.NotNull(orders);
@@ -44,7 +44,7 @@ namespace Tests.Infrastructure.Orders.Rss.Parser
                 new OrderBody("title3", "description3", new Uri("https://ru.wikipedia.org"), DateTime.Now.AddDays(2))
             };
             XDocument xml = _parser.ToXml(orders);
-            List<OrderBody> parsedOrders = _parser.GetFrom(xml);
+            OrderBody[] parsedOrders = _parser.GetFrom(xml);
 
             Assert.Equal(orders, parsedOrders);
         }

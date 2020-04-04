@@ -8,7 +8,7 @@ namespace Infrastructure.Orders.Rss.Parser
 {
     public class OrdersParser : IOrdersParser
     {
-        public List<OrderBody> GetFrom(XDocument xml)
+        public OrderBody[] GetFrom(XDocument xml)
         {
             return xml.Elements("rss")
                 .Elements()
@@ -19,7 +19,7 @@ namespace Infrastructure.Orders.Rss.Parser
                         p.Element("description").Value,
                         new Uri(p.Element("link").Value),
                         DateTime.Parse(p.Element("pubDate").Value)))
-                .ToList();
+                .ToArray();
         }
 
         public XDocument ToXml(IEnumerable<OrderBody> orders)
