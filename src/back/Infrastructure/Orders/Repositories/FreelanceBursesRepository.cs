@@ -23,8 +23,8 @@ namespace Infrastructure.Orders.Repositories
             using (IDbConnection connection = _connectionFactory.BuildConnection())
             {
                 string query = $@"
-                    select Id, Name, Link
-                    from FreelanceBurses";
+                    select ""Id"", ""Name"", ""Link""
+                    from ""FreelanceBurses""";
 
                 var result = await connection.QueryAsync<FreelanceBurseEntity>(query);
                 return result.Select(p => new FreelanceBurse(p.Id, new Uri(p.Link), p.Name)).ToArray();

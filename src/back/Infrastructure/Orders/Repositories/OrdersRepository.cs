@@ -23,15 +23,15 @@ namespace Infrastructure.Orders.Repositories
             using (IDbConnection connection = _connectionFactory.BuildConnection())
             {
                 string query = $@"
-                    insert into Orders
-                    (Title, Description, Link, Publication, FreelanceBurseId, Status)
+                    insert into ""Orders""
+                    (""Title"", ""Description"", ""Link"", ""Publication"", ""FreelanceBurseId"", ""Status"")
                     values(@title, @description, @link, @publication, @freelanceBurseId, @status)";
 
                 await connection.ExecuteAsync(query, orders.Select(p => new
                 {
                     title = p.Body.Title,
                     description = p.Body.Description,
-                    link = p.Body.Link,
+                    link = p.Body.Link.ToString(),
                     publication = p.Body.Publication,
                     freelanceBurseId,
                     status = ProcessingStatus.New
