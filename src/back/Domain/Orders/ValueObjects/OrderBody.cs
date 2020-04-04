@@ -16,15 +16,5 @@ namespace Domain.Orders.ValueObjects
             Link = link;
             Publication = publication;
         }
-
-        public override int GetHashCode()
-        {
-            return Link.GetHashCode();
-        }
-
-        public override bool Equals(object? obj)
-        {
-            return obj?.GetHashCode() == GetHashCode();
-        }
     }
 }
