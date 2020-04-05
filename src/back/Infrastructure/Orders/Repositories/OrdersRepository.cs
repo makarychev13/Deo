@@ -82,5 +82,28 @@ namespace Infrastructure.Orders.Repositories
                 }).ToArray();
             }
         }
+
+        public async Task HandleOrders(IEnumerable<Uri> links)
+        {
+            if (!links.Any())
+            {
+                return;
+            }
+            
+            using (IDbConnection connection = _connectionFactory.BuildConnection())
+            {
+                string query = $@"
+                    update ""Orders""
+                    set ""Status"" = '{ProcessingStatus.Finish}'
+                    where ""Link"" = ANY(@links)
+                ";
+
+                await connection.ExecuteAsync(query, 
+                    new
+                    {
+                        links = links.Select(p => p.ToString()).ToArray()
+                    });
+            }
+        }
     }
 }
