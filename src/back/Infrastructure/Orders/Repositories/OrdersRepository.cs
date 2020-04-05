@@ -23,6 +23,11 @@ namespace Infrastructure.Orders.Repositories
 
         public async Task MergePulledOrdersAsync(IEnumerable<Order> orders, int freelanceBurseId)
         {
+            if (!orders.Any())
+            {
+                return;
+            }
+            
             using (IDbConnection connection = _connectionFactory.BuildConnection())
             {
                 string query = $@"
@@ -48,24 +53,15 @@ namespace Infrastructure.Orders.Repositories
             using (IDbConnection connection = _connectionFactory.BuildConnection())
             {
                 string query = $@"
-                    update ""Orders""
-                    set ""Status"" = '{ProcessingStatus.InProcess.ToString()}'
-                    from (
-                        select
-                            o.""Id"", 
-                            o.""Title"", 
-                            o.""Description"", 
-                            o.""Link"", 
-                            o.""Publication"", 
-                            o.""FreelanceBurseId"",
-                            fb.""Id"",
-                            fb.""Link"", 
-                            fb.""Name""
-                        from ""Orders"" o
-                        join ""FreelanceBurses"" fb on o.""FreelanceBurseId"" = fb.""Id""
-                        where o.""Status"" = '{ProcessingStatus.New.ToString()}'
-                    ) as result
-                    returning result.*
+                    with cte as (
+                        update ""Orders""
+                        set ""Status"" = '{ProcessingStatus.InProcess}'
+                        where ""Status"" = '{ProcessingStatus.New}'
+                        returning ""Title"", ""Description"", ""Link"", ""Publication"", ""FreelanceBurseId""
+                    )
+                    select *
+                    from cte
+                    join ""FreelanceBurses"" fb on cte.""FreelanceBurseId"" = fb.""Id""
                 ";
 
                 var result = await connection.QueryAsync<OrderEntity, FreelanceBurseEntity, OrderEntity>(query, (o, fb) =>
