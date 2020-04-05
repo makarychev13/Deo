@@ -37,6 +37,7 @@ namespace Presentation
             services.AddSingleton<OrdersRepository>();
             services.AddSingleton<FreelanceBursesRepository>();
             services.AddHostedService<PullUnhandledOrders>();
+            services.AddHostedService<HandleOrders>();
             services
                 .AddKafkaConfigs(new ProducerConfig() {BootstrapServers = "localhost:9092"})
                 .AddKafkaProducer<string, Order>("orders");
