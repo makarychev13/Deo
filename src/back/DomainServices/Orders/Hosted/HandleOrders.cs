@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Common.HostedServices;
-using Common.Kafka.Consumer;
 using Common.Kafka.Producer;
 using Domain.Orders;
 using Infrastructure.Orders.Repositories;
