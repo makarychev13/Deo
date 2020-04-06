@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Text.Json;
 using Confluent.Kafka;
+using Utf8Json;
 
 namespace Common.Kafka
 {

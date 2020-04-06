@@ -46,7 +46,7 @@ namespace Presentation
                     new KafkaConsumerOptions
                     {
                         Topic = "orders",
-                        Config = new ConsumerConfig {GroupId = "dev_1", BootstrapServers = "localhost:9092"}
+                        Config = new ConsumerConfig {GroupId = "dev_1", BootstrapServers = "localhost:9092", AutoOffsetReset = AutoOffsetReset.Earliest}
                     }));
             services.AddDbContext<Context>(
                 options => options.UseNpgsql("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A"));
