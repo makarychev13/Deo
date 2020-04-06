@@ -38,16 +38,17 @@ namespace Presentation
             services.AddSingleton<FreelanceBursesRepository>();
             services.AddHostedService<PullUnhandledOrders>();
             services.AddHostedService<HandleOrders>();
+            services.AddHostedService<KafkaOrdersConsumer>();
             services
                 .AddKafkaConfigs(new ProducerConfig() {BootstrapServers = "localhost:9092"})
                 .AddKafkaProducer<string, Order>("orders");
-            services
-                .AddSingleton<IHostedService, KafkaOrdersConsumer>(p => new KafkaOrdersConsumer(
-                    new KafkaConsumerOptions
-                    {
-                        Topic = "orders",
-                        Config = new ConsumerConfig {GroupId = "dev_1", BootstrapServers = "localhost:9092", AutoOffsetReset = AutoOffsetReset.Earliest}
-                    }));
+            services.AddSingleton(p => new ConsumerConfig
+            {
+                GroupId = "dev_1", 
+                BootstrapServers = "localhost:9092",
+                AutoOffsetReset = AutoOffsetReset.Earliest,
+                EnableAutoOffsetStore = false
+            });
             services.AddDbContext<Context>(
                 options => options.UseNpgsql("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A"));
             services.AddSingleton<ISqlConnectionFactory>(

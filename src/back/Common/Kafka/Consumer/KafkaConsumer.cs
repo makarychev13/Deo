@@ -9,25 +9,28 @@ namespace Common.Kafka.Consumer
 {
     public abstract class KafkaConsumer<TK, TV> : BackgroundService
     {
-        private readonly KafkaConsumerOptions _options;
+        private readonly ConsumerConfig _options;
 
-        protected KafkaConsumer(KafkaConsumerOptions options)
+        protected KafkaConsumer(ConsumerConfig options)
         {
             _options = options;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            ExecuteCore(stoppingToken);
-            return Task.CompletedTask;
+            return Task.Factory.StartNew(
+                () => ExecuteCore(stoppingToken),
+                stoppingToken,
+                TaskCreationOptions.LongRunning,
+                TaskScheduler.Current).ContinueWith(p => { throw p.Exception; }, TaskContinuationOptions.OnlyOnFaulted);
         }
 
         protected void ExecuteCore(CancellationToken stoppingToken)
         {
-            var builder = new ConsumerBuilder<TK, TV>(_options.Config).SetValueDeserializer(new KafkaDeserializer<TV>());
+            var builder = new ConsumerBuilder<TK, TV>(_options).SetValueDeserializer(new KafkaDeserializer<TV>());
             using (IConsumer<TK, TV> consumer = builder.Build())
             {
-                consumer.Subscribe(_options.Topic);
+                consumer.Subscribe(Topic);
 
                 while (!stoppingToken.IsCancellationRequested)
                 {
@@ -44,5 +47,7 @@ namespace Common.Kafka.Consumer
         protected abstract Task ConsumeAsync(TK key, TV message);
 
         protected abstract bool NeedConsume(TK key, TV message);
+        
+        protected abstract string Topic {get;}
     }
 }
