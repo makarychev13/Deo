@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using Common.Kafka.Consumer;
-using Confluent.Kafka;
 using Domain.Orders;
 
 namespace Infrastructure.Orders.Kafka
@@ -12,13 +11,13 @@ namespace Infrastructure.Orders.Kafka
         {
         }
 
-        protected override async Task ConsumeAsync(ConsumeResult<string, Order> message)
+        protected override async Task ConsumeAsync(string key, Order message)
         {
             await Task.CompletedTask;
-            Console.WriteLine(message.Value.Body.Title);
+            Console.WriteLine(message.Body.Title);
         }
 
-        protected override bool NeedConsume(ConsumeResult<string, Order> message)
+        protected override bool NeedConsume(string key, Order message)
         {
             return true;
         }

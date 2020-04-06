@@ -16,9 +16,10 @@ namespace Common.Kafka.Consumer
             _options = options;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             ExecuteCore(stoppingToken);
+            return Task.CompletedTask;
         }
 
         protected void ExecuteCore(CancellationToken stoppingToken)
@@ -31,17 +32,17 @@ namespace Common.Kafka.Consumer
                 while (!stoppingToken.IsCancellationRequested)
                 {
                     ConsumeResult<TK, TV> result = consumer.Consume(TimeSpan.FromMilliseconds(1000));
-                    if (result != null && NeedConsume(result))
+                    if (result != null && NeedConsume(result.Key, result.Value))
                     {
-                        ConsumeAsync(result).GetAwaiter().GetResult();
+                        ConsumeAsync(result.Key, result.Value).GetAwaiter().GetResult();
                         consumer.StoreOffset(result);
                     }
                 }
             }
         }
 
-        protected abstract Task ConsumeAsync(ConsumeResult<TK, TV> message);
+        protected abstract Task ConsumeAsync(TK key, TV message);
 
-        protected abstract bool NeedConsume(ConsumeResult<TK, TV> message);
+        protected abstract bool NeedConsume(TK key, TV message);
     }
 }
