@@ -1,5 +1,4 @@
-﻿using Domain.Keywords;
-using Domain.Notifications;
+﻿using Domain.Notifications;
 using Domain.Users.ValueObjects;
 
 namespace Domain.Users
@@ -10,10 +9,10 @@ namespace Domain.Users
         public readonly bool Active;
         public readonly Contact Contact;
         public readonly Subscriptions Subscriptions;
-        public readonly WhiteKeyword[] WhiteKeywords;
-        public readonly BlackKeyword[] BlackKeywords;
+        public readonly string[] WhiteKeywords;
+        public readonly string[] BlackKeywords;
 
-        public User(int id, bool active, Contact contact, Subscriptions subscriptions, WhiteKeyword[] whiteKeywords, BlackKeyword[] blackKeywords)
+        public User(int id, bool active, Contact contact, Subscriptions subscriptions, string[] whiteKeywords, string[] blackKeywords)
         {
             Id = id;
             Active = active;
