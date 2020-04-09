@@ -3,20 +3,13 @@ using Domain.Notifications.Messages.ValueObjects;
 
 namespace Domain.Notifications.Messages
 {
-    public sealed class TelegramMessage
+    public sealed class TelegramMessage : Message
     {
-        public readonly string Id;
         public readonly TelegramBody Body;
-
-        public TelegramMessage(string id, TelegramBody body)
+        
+        public TelegramMessage(string to, TelegramBody body) : base(to)
         {
-            Id = id;
             Body = body;
-        }
-
-        public static TelegramBody BodyFrom()
-        {
-            throw new NotImplementedException();
         }
     }
 }

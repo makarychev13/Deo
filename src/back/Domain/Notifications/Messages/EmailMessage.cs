@@ -3,26 +3,13 @@ using Domain.Orders;
 
 namespace Domain.Notifications.Messages
 {
-    public sealed class EmailMessage
+    public sealed class EmailMessage : Message
     {
-        public readonly string To;
-        public readonly EmailBody EmailBody;
-
-        public EmailMessage(string to, EmailBody emailBody)
+        public readonly EmailBody Body;
+        
+        public EmailMessage(string to, EmailBody body) : base(to)
         {
-            To = to;
-            EmailBody = emailBody;
-        }
-
-        public static EmailBody BodyFrom(Order order)
-        {
-            var subject = $"{order.Source.Name} - {order.Body.Title}";
-            var htmlBody = $@"
-                <h2>{order.Body.Title}</h2>
-                <br>
-                <p>{order.Body.Description}</p>
-                <a href='{order.Body.Link} target='_blank'>Подробнее</a>";
-            return new EmailBody(subject, htmlBody);
+            Body = body;
         }
     }
 }
