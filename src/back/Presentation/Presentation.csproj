@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DomainServices\DomainServices.csproj" />
+      <ProjectReference Include="..\Migrations\Migrations.csproj" />
     </ItemGroup>
 
 

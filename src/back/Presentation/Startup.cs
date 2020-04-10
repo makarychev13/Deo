@@ -3,12 +3,13 @@ using Common.Kafka.Consumer;
 using Common.Repositories;
 using Confluent.Kafka;
 using Domain.Orders;
-using Domain.Orders.ValueObjects;
 using DomainServices.Orders.Hosted;
+using Infrastructure.Notifications;
 using Infrastructure.Orders.Kafka;
 using Infrastructure.Orders.Repositories;
 using Infrastructure.Orders.Rss.Parser;
 using Infrastructure.Orders.Rss.Reader;
+using Infrastructure.Users.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,8 @@ namespace Presentation
             services.AddSingleton<IOrdersReader, OrdersReader>();
             services.AddSingleton<OrdersRepository>();
             services.AddSingleton<FreelanceBursesRepository>();
+            services.AddSingleton<UsersRepository>();
+            services.AddSingleton<NotificationsFabric>();
             services.AddHostedService<PullUnhandledOrders>();
             services.AddHostedService<HandleOrders>();
             services.AddHostedService<KafkaOrdersConsumer>();
@@ -50,7 +53,7 @@ namespace Presentation
                 EnableAutoOffsetStore = false
             });
             services.AddDbContext<Context>(
-                options => options.UseNpgsql("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A"));
+                options => options.UseNpgsql("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A", p => p.MigrationsAssembly(typeof(Context).Assembly.FullName)));
             services.AddSingleton<ISqlConnectionFactory>(
                 p => new SqlConnectionFactory("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A"));
         }

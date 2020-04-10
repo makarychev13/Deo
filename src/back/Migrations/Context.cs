@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Migrations.Tables.FreelanceBurses;
+using Migrations.Tables.Keywords;
 using Migrations.Tables.Orders;
 
 namespace Migrations
@@ -8,6 +9,7 @@ namespace Migrations
     {
         public DbSet<FreelanceBurseEntity> FreelanceBurses { get; set; }
         public DbSet<OrderEntity> Orders { get; set; }
+        public DbSet<KeywordEntity> Keywords { get; set; }
 
         public Context(DbContextOptions<Context> options) : base(options)
         {
@@ -17,6 +19,7 @@ namespace Migrations
         {
             modelBuilder.ApplyConfiguration(new FreelanceBurseEntityConfiguration());
             modelBuilder.ApplyConfiguration(new OrderEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new KeywordEntityConfiguration());
         }
     }
 }
