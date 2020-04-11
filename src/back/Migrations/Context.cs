@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Notifications;
+using Microsoft.EntityFrameworkCore;
 using Migrations.Tables.FreelanceBurses;
 using Migrations.Tables.Keywords;
 using Migrations.Tables.Orders;
@@ -20,6 +21,8 @@ namespace Migrations
             modelBuilder.ApplyConfiguration(new FreelanceBurseEntityConfiguration());
             modelBuilder.ApplyConfiguration(new OrderEntityConfiguration());
             modelBuilder.ApplyConfiguration(new KeywordEntityConfiguration());
+
+            modelBuilder.HasPostgresEnum<Subscriptions>();
         }
     }
 }
