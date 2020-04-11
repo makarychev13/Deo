@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,19 +6,18 @@ using Confluent.Kafka;
 using Domain.Notifications;
 using Domain.Notifications.Messages;
 using Domain.Orders;
-using Domain.Users;
 using Domain.Users.ValueObjects;
 using Infrastructure.Notifications;
 using Infrastructure.Users.Repositories;
 
-namespace Infrastructure.Orders.Kafka
+namespace DomainServices.Notifications.Kafka
 {
-    public sealed class KafkaOrdersConsumer : KafkaConsumer<string, Order>
+    public sealed class CreateNotificationsFromOrder : KafkaConsumer<string, Order>
     {
         private readonly UsersRepository _usersRepository;
         private readonly NotificationsFabric _notificationsFabric;
         
-        public KafkaOrdersConsumer(ConsumerConfig options, UsersRepository usersRepository, NotificationsFabric notificationsFabric) : base(options)
+        public CreateNotificationsFromOrder(ConsumerConfig options, UsersRepository usersRepository, NotificationsFabric notificationsFabric) : base(options)
         {
             _usersRepository = usersRepository;
             _notificationsFabric = notificationsFabric;

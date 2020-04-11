@@ -6,7 +6,6 @@ using Migrations.Tables.Keywords;
 using Migrations.Tables.Orders;
 using Migrations.Tables.Users;
 using Migrations.Tables.UsersToKeywords;
-using Npgsql;
 
 namespace Migrations
 {
