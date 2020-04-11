@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Domain.Notifications;
+using Migrations.Tables.UsersToKeywords;
 
 namespace Migrations.Tables.Users
 {
@@ -11,5 +12,7 @@ namespace Migrations.Tables.Users
         public string PasswordHash { get; set; }
         public bool Active { get; set; }
         public Subscriptions Subscriptions { get; set; }
+        
+        public List<UsersToKeywordsEntity> ToKeywords { get; set; }
     }
 }
