@@ -1,4 +1,4 @@
-### Features
+### Back
 Добавить миграцию:
 `dotnet ef migrations add %name% --project ../Migrations`
 

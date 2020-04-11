@@ -1,8 +1,11 @@
-﻿using Domain.Notifications;
+﻿using System.Reflection.Emit;
+using Domain.Notifications;
 using Microsoft.EntityFrameworkCore;
 using Migrations.Tables.FreelanceBurses;
 using Migrations.Tables.Keywords;
 using Migrations.Tables.Orders;
+using Migrations.Tables.Users;
+using Npgsql;
 
 namespace Migrations
 {
@@ -11,6 +14,7 @@ namespace Migrations
         public DbSet<FreelanceBurseEntity> FreelanceBurses { get; set; }
         public DbSet<OrderEntity> Orders { get; set; }
         public DbSet<KeywordEntity> Keywords { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
 
         public Context(DbContextOptions<Context> options) : base(options)
         {
@@ -21,8 +25,7 @@ namespace Migrations
             modelBuilder.ApplyConfiguration(new FreelanceBurseEntityConfiguration());
             modelBuilder.ApplyConfiguration(new OrderEntityConfiguration());
             modelBuilder.ApplyConfiguration(new KeywordEntityConfiguration());
-
-            modelBuilder.HasPostgresEnum<Subscriptions>();
+            modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
         }
     }
 }
