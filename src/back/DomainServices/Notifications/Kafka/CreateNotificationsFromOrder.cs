@@ -40,7 +40,10 @@ namespace DomainServices.Notifications.Kafka
 
             foreach (var msg in messages)
             {
-                
+                foreach (var qq in messages[msg.Key])
+                {
+                    //produce(msg.Key, qq)
+                }
             }
         }
 

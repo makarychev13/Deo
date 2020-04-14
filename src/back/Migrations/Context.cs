@@ -1,6 +1,4 @@
-﻿using System.Reflection.Emit;
-using Domain.Notifications;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Migrations.Tables.FreelanceBurses;
 using Migrations.Tables.Keywords;
 using Migrations.Tables.Orders;

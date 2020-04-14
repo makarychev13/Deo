@@ -1,8 +1,5 @@
-﻿using System;
-
-namespace Domain.Notifications
+﻿namespace Domain.Notifications
 {
-    [Flags]
     public enum Subscriptions
     {
         Email = 0,
