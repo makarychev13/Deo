@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using Common.Repositories;
+using Dapper;
 using Domain.Notifications;
 using Domain.Orders;
+using Domain.Users;
 using Domain.Users.ValueObjects;
+using Migrations.Tables.Users;
 
 namespace Infrastructure.Users.Repositories
 {
@@ -19,13 +23,31 @@ namespace Infrastructure.Users.Repositories
             _connectionFactory = connectionFactory;
         }
 
-        public async Task<Dictionary<Subscriptions, Contact[]>> GetForNotifications(Order order)
+        public async Task<User[]> GetForNotifications(Order order)
         {
             using (IDbConnection connection = _connectionFactory.BuildConnection())
             {
-                string query = $@"";
+                string query = $@"
+                select ""Users"".*
+                from ""Users""
+                    join ""UsersToKeywords"" UTK on ""Users"".""Id"" = UTK.""UserId""
+                    join ""Keywords"" k on UTK.""KeywordId"" = k.""Id""
+                where
+                    ""Active"" = true
+                    and (""TelegramId"" is not null or ""Email"" is not null)";
+
+                IEnumerable<UserEntity> result = await connection.QueryAsync<UserEntity>(query, new
+                {
+                    title = order.Body.Title,
+                    description = order.Body.Description
+                });
+
+                return result.Select(p =>
+                {
+                    var contact = new Contact(p.TelegramId, p.Email);
+                    return new User(p.Active, contact, p.Subscriptions);
+                }).ToArray();
             }
-            throw new NotImplementedException();
         }
     }
 }

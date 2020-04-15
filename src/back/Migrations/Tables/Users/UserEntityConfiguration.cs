@@ -16,6 +16,8 @@ namespace Migrations.Tables.Users
             builder.Property(p => p.Email).IsRequired();
             builder.HasIndex(p => p.Email).IsUnique();
 
+            builder.HasIndex(p => p.TelegramId).IsUnique();
+
             builder.Property(p => p.PasswordHash).IsRequired();
 
             builder.Property(p => p.Subscriptions).IsRequired().HasConversion(

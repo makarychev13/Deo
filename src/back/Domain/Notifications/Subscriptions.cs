@@ -3,6 +3,7 @@
     public enum Subscriptions
     {
         Email = 0,
-        Vk = 1
+        Vk = 1,
+        Telegram = 2
     }
 }
