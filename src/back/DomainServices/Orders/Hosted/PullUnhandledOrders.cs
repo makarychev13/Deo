@@ -8,7 +8,7 @@ using Infrastructure.Orders.Rss.Reader;
 
 namespace DomainServices.Orders.Hosted
 {
-    public sealed class PullUnhandledOrders : CommonHostedService
+    public sealed class PullUnhandledOrders : BaseHostedService
     {
         protected override TimeSpan Period => TimeSpan.FromMinutes(4);
 

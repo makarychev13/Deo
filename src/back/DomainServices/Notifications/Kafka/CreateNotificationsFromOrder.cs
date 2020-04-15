@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Common.Kafka.Consumer;
 using Confluent.Kafka;
@@ -7,7 +6,6 @@ using Domain.Notifications;
 using Domain.Notifications.Messages;
 using Domain.Orders;
 using Domain.Users;
-using Domain.Users.ValueObjects;
 using Infrastructure.Notifications;
 using Infrastructure.Notifications.Repositories;
 using Infrastructure.Users.Repositories;
@@ -33,7 +31,7 @@ namespace DomainServices.Notifications.Kafka
         {
             User[] users = await _usersRepository.GetForNotifications(message);
             Dictionary<Subscriptions, List<Message>> messages = _notificationsFabric.Create(users, message);
-            await _outboxNotificationsRepository.SaveToFlush(messages);
+            await _outboxNotificationsRepository.SaveToPush(messages);
         }
 
         protected override bool NeedConsume(string key, Order message)

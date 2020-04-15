@@ -8,7 +8,7 @@ using Infrastructure.Orders.Repositories;
 
 namespace DomainServices.Orders.Hosted
 {
-    public class HandleOrders : CommonHostedService
+    public class HandleOrders : BaseHostedService
     {
         protected override TimeSpan Period => TimeSpan.FromMinutes(2);
 

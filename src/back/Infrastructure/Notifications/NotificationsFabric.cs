@@ -16,9 +16,9 @@ namespace Infrastructure.Notifications
         {
             var messages = new Dictionary<Subscriptions, List<Message>>()
             {
-                {Subscriptions.Email, new List<Message>()},
-                {Subscriptions.Telegram, new List<Message>()},
-                {Subscriptions.Vk, new List<Message>()}
+                { Subscriptions.Email, new List<Message>() },
+                { Subscriptions.Telegram, new List<Message>() },
+                { Subscriptions.Vk, new List<Message>() }
             };
 
             foreach (var user in users)

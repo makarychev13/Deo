@@ -5,7 +5,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Common.HostedServices
 {
-    public abstract class CommonHostedService : IHostedService, IDisposable
+    public abstract class BaseHostedService : IHostedService, IDisposable
     {
         private Timer _timer;
 

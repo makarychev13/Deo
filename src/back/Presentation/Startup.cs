@@ -1,8 +1,7 @@
-using System;
-using Common.Kafka.Consumer;
 using Common.Repositories;
 using Confluent.Kafka;
 using Domain.Orders;
+using DomainServices.Notifications.Hosted;
 using DomainServices.Notifications.Kafka;
 using DomainServices.Orders.Hosted;
 using Infrastructure.Notifications;
@@ -42,6 +41,7 @@ namespace Presentation
             services.AddHostedService<PullUnhandledOrders>();
             services.AddHostedService<HandleOrders>();
             services.AddHostedService<CreateNotificationsFromOrder>();
+            services.AddHostedService<PushNotificationsToKafka>();
             services
                 .AddKafkaConfigs(new ProducerConfig() {BootstrapServers = "localhost:9092"})
                 .AddKafkaProducer<string, Order>("orders");
