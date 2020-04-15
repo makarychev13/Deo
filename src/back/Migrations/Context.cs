@@ -3,6 +3,7 @@ using Migrations.Tables.FreelanceBurses;
 using Migrations.Tables.Keywords;
 using Migrations.Tables.Orders;
 using Migrations.Tables.Users;
+using Migrations.Tables.UsersToFreelanceBurses;
 using Migrations.Tables.UsersToKeywords;
 
 namespace Migrations
@@ -14,6 +15,7 @@ namespace Migrations
         public DbSet<KeywordEntity> Keywords { get; set; }
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<UsersToKeywordsEntity> UsersToKeywords { get; set; }
+        public DbSet<UsersToFreelanceBursesEntity> UsersToFreelanceBurses { get; set;}
 
         public Context(DbContextOptions<Context> options) : base(options)
         {

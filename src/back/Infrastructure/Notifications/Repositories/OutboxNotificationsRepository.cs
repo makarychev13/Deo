@@ -8,7 +8,7 @@ namespace Infrastructure.Notifications.Repositories
 {
     public class OutboxNotificationsRepository
     {
-        public async Task SaveToPush(IDictionary<Subscriptions, List<Message>> events)
+        public async Task SaveToPush(IDictionary<Subscriptions, List<Message>> events, string idempotencyKey)
         {
             throw new NotImplementedException();
         } 

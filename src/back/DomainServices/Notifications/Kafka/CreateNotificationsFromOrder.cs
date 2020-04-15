@@ -31,7 +31,7 @@ namespace DomainServices.Notifications.Kafka
         {
             User[] users = await _usersRepository.GetForNotifications(message);
             Dictionary<Subscriptions, List<Message>> messages = _notificationsFabric.Create(users, message);
-            await _outboxNotificationsRepository.SaveToPush(messages);
+            await _outboxNotificationsRepository.SaveToPush(messages, message.Body.Link.ToString());
         }
 
         protected override bool NeedConsume(string key, Order message)
