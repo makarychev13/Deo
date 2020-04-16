@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Domain.Notifications;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Migrations.Tables.OutboxNotifications
@@ -9,6 +11,16 @@ namespace Migrations.Tables.OutboxNotifications
         {
             builder.ToTable("OutboxNotifications");
             builder.HasKey(p => p.Id);
+
+            builder.Property(p => p.Data).IsRequired().HasColumnType("json");
+            
+            builder.Property(p => p.Transport).IsRequired().HasConversion(
+                p => p.ToString(),
+                p => (Subscriptions)Enum.Parse(typeof(Subscriptions), p));
+
+            builder.Property(p => p.Status).IsRequired().HasConversion(
+                p => p.ToString(),
+                p => (OutboxNotificationsStatusEntity)Enum.Parse(typeof(OutboxNotificationsStatusEntity), p));
         }
     }
 }

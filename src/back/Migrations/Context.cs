@@ -17,7 +17,7 @@ namespace Migrations
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<UsersToKeywordsEntity> UsersToKeywords { get; set; }
         public DbSet<UsersToFreelanceBursesEntity> UsersToFreelanceBurses { get; set;}
-        //public DbSet<OutboxNotificationEntity> OutboxNotifications { get; set; }
+        public DbSet<OutboxNotificationEntity> OutboxNotifications { get; set; }
 
         public Context(DbContextOptions<Context> options) : base(options)
         {
@@ -30,6 +30,7 @@ namespace Migrations
             modelBuilder.ApplyConfiguration(new KeywordEntityConfiguration());
             modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
             modelBuilder.ApplyConfiguration(new UsersToKeywordsEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new OutboxNotificationEntityConfiguration());
         }
     }
 }
