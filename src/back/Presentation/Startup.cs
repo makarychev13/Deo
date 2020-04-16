@@ -5,6 +5,7 @@ using DomainServices.Notifications.Hosted;
 using DomainServices.Notifications.Kafka;
 using DomainServices.Orders.Hosted;
 using Infrastructure.Notifications;
+using Infrastructure.Notifications.Repositories;
 using Infrastructure.Orders.Repositories;
 using Infrastructure.Orders.Rss.Parser;
 using Infrastructure.Orders.Rss.Reader;
@@ -38,6 +39,7 @@ namespace Presentation
             services.AddSingleton<FreelanceBursesRepository>();
             services.AddSingleton<UsersRepository>();
             services.AddSingleton<NotificationsFabric>();
+            services.AddSingleton<OutboxNotificationsRepository>();
             services.AddHostedService<PullUnhandledOrders>();
             services.AddHostedService<HandleOrders>();
             services.AddHostedService<CreateNotificationsFromOrder>();

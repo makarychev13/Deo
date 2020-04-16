@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Migrations.Tables.Orders;
+using Migrations.Tables.UsersToFreelanceBurses;
 
 namespace Migrations.Tables.FreelanceBurses
 {
@@ -10,5 +11,6 @@ namespace Migrations.Tables.FreelanceBurses
         public string Name { get; set; }
         
         public List<OrderEntity> Orders { get; set; }
+        public List<UsersToFreelanceBursesEntity> ToUsers { get; set; }
     }
 }

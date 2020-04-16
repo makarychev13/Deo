@@ -6,7 +6,7 @@ using Domain.Notifications.Messages;
 
 namespace Infrastructure.Notifications.Repositories
 {
-    public class OutboxNotificationsRepository
+    public sealed class OutboxNotificationsRepository
     {
         public async Task SaveToPush(IDictionary<Subscriptions, List<Message>> events, string idempotencyKey)
         {
