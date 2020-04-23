@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Text;
 using Confluent.Kafka;
-using Utf8Json;
+using Newtonsoft.Json;
 
 namespace Common.Kafka
 {
@@ -23,8 +24,9 @@ namespace Common.Kafka
                 return default;
             }
             
-            byte[] bytes = data.ToArray();
-            return JsonSerializer.Deserialize<T>(bytes);
+            string exemplar = Encoding.UTF8.GetString(data);
+
+            return JsonConvert.DeserializeObject<T>(exemplar);
         }
     }
 }

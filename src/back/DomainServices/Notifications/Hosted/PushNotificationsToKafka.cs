@@ -8,7 +8,7 @@ namespace DomainServices.Notifications.Hosted
     {
         protected override Task ExecuteAsync()
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask;
         }
 
         protected override TimeSpan Period => TimeSpan.FromMinutes(1);

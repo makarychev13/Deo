@@ -12,7 +12,7 @@ namespace Migrations.Tables.OutboxNotifications
             builder.ToTable("OutboxNotifications");
             builder.HasKey(p => p.Id);
 
-            builder.Property(p => p.Data).IsRequired().HasColumnType("json");
+            builder.Property(p => p.Data).IsRequired();
             
             builder.Property(p => p.Transport).IsRequired().HasConversion(
                 p => p.ToString(),

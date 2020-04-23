@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Text.RegularExpressions;
 using Domain.Orders;
 
 namespace Domain.Notifications.Messages.ValueObjects
@@ -14,7 +14,12 @@ namespace Domain.Notifications.Messages.ValueObjects
 
         public static TelegramBody CreateFrom(Order order)
         {
-            throw new NotImplementedException();
+            string markdownBody = $@"
+                <b>{order.Body.Title}</b>
+                <br>
+                {Regex.Replace(order.Body.Description, "<.*?>", string.Empty)}";
+            
+            return new TelegramBody(markdownBody);
         }
     }
 }

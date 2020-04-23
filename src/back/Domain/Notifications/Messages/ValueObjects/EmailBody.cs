@@ -16,7 +16,14 @@ namespace Domain.Notifications.Messages.ValueObjects
 
         public static EmailBody CreateFrom(Order order)
         {
-            throw new NotImplementedException();
+            string subject = order.Body.Title;
+            string htmlBody = $@"
+            <b>{order.Body.Title}<b>
+            <br>
+            {order.Body.Description}
+            <a href='{order.Body.Link}'>Подробнее</a>";
+            
+            return new EmailBody(subject, htmlBody);
         }
     }
 }

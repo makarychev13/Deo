@@ -1,6 +1,7 @@
 using System;
+using System.Text;
 using Confluent.Kafka;
-using Utf8Json;
+using Newtonsoft.Json;
 
 namespace Common.Kafka
 {
@@ -13,7 +14,9 @@ namespace Common.Kafka
             if (typeof(T) == typeof(Ignore))
                 throw new NotSupportedException("Невозможно сериализовать тип Ignore для получения значения выражения");
 
-            return JsonSerializer.Serialize(data);
+            string json = JsonConvert.SerializeObject(data);
+            
+            return Encoding.UTF8.GetBytes(json);
         }
     }
 }
