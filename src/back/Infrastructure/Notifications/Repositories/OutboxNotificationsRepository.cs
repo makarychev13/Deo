@@ -24,7 +24,8 @@ namespace Infrastructure.Notifications.Repositories
             string sql = $@"
                 insert into ""OutboxNotifications""
                 (""IdempotencyKey"", ""Data"", ""Transport"", ""Status"")
-                values(@key, @data, @subscriptions, @status)";
+                values(@key, @data, @subscriptions, @status)
+                on conflict(""IdempotencyKey"") do nothing";
 
             using (IDbConnection connection = _connectionFactory.BuildConnection())
             {
