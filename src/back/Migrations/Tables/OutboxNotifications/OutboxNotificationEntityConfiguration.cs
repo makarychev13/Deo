@@ -24,6 +24,8 @@ namespace Migrations.Tables.OutboxNotifications
             builder.Property(p => p.Status).IsRequired().HasConversion(
                 p => p.ToString(),
                 p => (OutboxNotificationsStatusEntity)Enum.Parse(typeof(OutboxNotificationsStatusEntity), p));
+            
+            builder.Property(p => p.LastModificationDate).IsRequired().HasDefaultValueSql("now()");
         }
     }
 }
