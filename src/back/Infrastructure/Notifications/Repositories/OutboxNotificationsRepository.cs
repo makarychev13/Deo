@@ -37,7 +37,7 @@ namespace Infrastructure.Notifications.Repositories
                         {
                             key = $"{@event.Key}_{orderLink}_{message.To}".ToLower(),
                             data = JsonConvert.SerializeObject(message, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto }),
-                            subscriptions = @event.Key,
+                            subscriptions = @event.Key.ToString(),
                             status = OutboxNotificationsStatusEntity.New.ToString()
                         });   
                     }

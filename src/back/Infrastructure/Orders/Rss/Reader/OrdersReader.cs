@@ -19,7 +19,6 @@ namespace Infrastructure.Orders.Rss.Reader
             _parser = parser;
         }
 
-
         public async Task<Order[]> GetFrom(FreelanceBurse burse)
         {
             await Task.CompletedTask;

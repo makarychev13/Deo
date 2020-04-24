@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -55,8 +55,12 @@ namespace Infrastructure.Orders.Repositories
                 string query = $@"
                     with cte as (
                         update ""Orders""
-                        set ""Status"" = '{ProcessingStatus.InProcess}'
-                        where ""Status"" = '{ProcessingStatus.New}'
+                        set 
+                            ""Status"" = '{ProcessingStatus.InProcess}', 
+                            ""LastModificationDate"" = now()
+                        where 
+                            ""Status"" = '{ProcessingStatus.New}' 
+                            or (""Status"" = '{ProcessingStatus.InProcess}' and date_part('minutes', now() - ""LastModificationDate""::timestamp) > 5)
                         returning ""Title"", ""Description"", ""Link"", ""Publication"", ""FreelanceBurseId""
                     )
                     select *

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Migrations.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class EFContextModelSnapshot : ModelSnapshot
+    [Migration("20200424151042_OrdersLastModificationsDateAdd")]
+    partial class OrdersLastModificationsDateAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,7 +83,7 @@ namespace Migrations.Migrations
                     b.Property<DateTime>("LastModificationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValueSql("now()");
+                        .HasDefaultValue(new DateTime(2020, 4, 24, 18, 10, 42, 660, DateTimeKind.Local).AddTicks(6930));
 
                     b.Property<string>("Link")
                         .IsRequired()

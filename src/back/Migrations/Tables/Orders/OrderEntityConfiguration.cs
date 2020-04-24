@@ -13,16 +13,23 @@ namespace Migrations.Tables.Orders
             builder.HasKey(p => p.Id);
             
             builder.Property(p => p.Title).IsRequired();
+            
             builder.Property(p => p.Description).IsRequired();
+            
             builder.HasIndex(p => p.Link).IsUnique();
             builder.Property(p => p.Link).IsRequired();
+            
             builder.Property(p => p.Publication).IsRequired();
+            
             builder.Property(p => p.Status)
                 .IsRequired()
                 .HasConversion(
                     p => p.ToString(),
                     p => (ProcessingStatus)Enum.Parse(typeof(ProcessingStatus), p));
+            
             builder.Property(p => p.FreelanceBurseId).IsRequired();
+
+            builder.Property(p => p.LastModificationDate).IsRequired().HasDefaultValueSql("now()");
             
             builder
                 .HasOne(p => p.FreelanceBurse)

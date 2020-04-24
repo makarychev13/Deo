@@ -12,6 +12,7 @@ namespace Migrations.Tables.Orders
         public DateTime Publication { get; set; }
         public int FreelanceBurseId { get; set; }
         public ProcessingStatus Status { get; set; }
+        public DateTime LastModificationDate { get; set; }
         
         public FreelanceBurseEntity FreelanceBurse { get; set; }
     }
