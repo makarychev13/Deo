@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Common.HostedServices;
 using Common.Kafka.Producer;
@@ -22,10 +23,17 @@ namespace DomainServices.Notifications.Hosted
         protected override async Task ExecuteAsync()
         {
             Notification[] notifications = await _notificationsRepository.GetUnhandled();
+            if (!notifications.Any())
+            {
+                return;
+            }
+            
             foreach (Notification notification in notifications)
             {
                 await _producer.ProduceAsync(notification.Transport.ToString(), notification.Message);
             }
+
+            await _notificationsRepository.Handle(notifications.Select(p => p.Id));
         }
 
         protected override TimeSpan Period => TimeSpan.FromMinutes(1);
