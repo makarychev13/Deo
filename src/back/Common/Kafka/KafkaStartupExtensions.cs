@@ -19,13 +19,15 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton(sp =>
             {
                 var config = sp.GetRequiredService<ProducerConfig>();
-                var builder = new ProducerBuilder<Tk, Tv>(config).SetValueSerializer(new KafkaSerializer<Tv>());
+                var builder = new ProducerBuilder<Tk, Tv>(config)
+                    .SetValueSerializer(new KafkaSerializer<Tv>())
+                    .SetKeySerializer(new KafkaSerializer<Tk>());
 
                 return builder.Build();
             });
 
             services
-                .Configure<KafkaProducerOptions>(p => p.Topic = topic)
+                .Configure<KafkaProducerOptions<Tk, Tv>>(p => p.Topic = topic)
                 .AddSingleton<KafkaProducer<Tk, Tv>>();
 
             return services;

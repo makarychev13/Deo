@@ -1,5 +1,7 @@
 using Common.Repositories;
 using Confluent.Kafka;
+using Domain.Notifications;
+using Domain.Notifications.Messages;
 using Domain.Orders;
 using DomainServices.Notifications.Hosted;
 using DomainServices.Notifications.Kafka;
@@ -46,7 +48,8 @@ namespace Presentation
             services.AddHostedService<PushNotificationsToKafka>();
             services
                 .AddKafkaConfigs(new ProducerConfig() {BootstrapServers = "localhost:9092"})
-                .AddKafkaProducer<string, Order>("orders");
+                .AddKafkaProducer<string, Order>("orders")
+                .AddKafkaProducer<string, Message>("notifications");
             services.AddSingleton(p => new ConsumerConfig
             {
                 GroupId = "dev_1", 

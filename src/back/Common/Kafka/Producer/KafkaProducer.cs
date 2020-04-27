@@ -10,7 +10,7 @@ namespace Common.Kafka.Producer
         private readonly IProducer<Tk, Tv> _producer;
         private readonly string _topic;
 
-        public KafkaProducer(IOptions<KafkaProducerOptions> topicOptions, IProducer<Tk, Tv> producer)
+        public KafkaProducer(IOptions<KafkaProducerOptions<Tk, Tv>> topicOptions, IProducer<Tk, Tv> producer)
         {
             _topic = topicOptions.Value.Topic;
             _producer = producer;

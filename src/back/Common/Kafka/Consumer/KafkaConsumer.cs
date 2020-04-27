@@ -47,7 +47,7 @@ namespace Common.Kafka.Consumer
         protected abstract Task ConsumeAsync(TK key, TV message);
 
         protected abstract bool NeedConsume(TK key, TV message);
-        
-        protected abstract string Topic {get;}
+
+        protected abstract string Topic { get; }
     }
 }
