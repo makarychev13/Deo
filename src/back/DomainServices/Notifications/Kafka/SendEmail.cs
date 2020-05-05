@@ -7,18 +7,16 @@ using Domain.Notifications.Messages;
 
 namespace DomainServices.Notifications.Kafka
 {
-    public sealed class EmailMessageHandler : KafkaConsumer<string, EmailMessage>
+    public sealed class SendEmail : IKafkaHandler<string, EmailMessage>
     {
         private readonly SmtpClient _smtpClient;
         
-        public EmailMessageHandler(ConsumerConfig options, SmtpClient smtpClient) : base(options)
+        public SendEmail(SmtpClient smtpClient)
         {
             _smtpClient = smtpClient;
         }
-
-        protected override string Topic => "notifications";
-
-        protected override async Task ConsumeAsync(string key, EmailMessage message)
+        
+        public async Task HandleAsync(string key, EmailMessage message)
         {
             var eMailMessage = new MailMessage("makar.tula@gmail.com", message.To)
             {
@@ -31,11 +29,6 @@ namespace DomainServices.Notifications.Kafka
             {
                 _smtpClient.Send(eMailMessage);
             }
-        }
-
-        protected override bool NeedConsume(string key, EmailMessage message)
-        {
-            return key.Equals("\"Email\"", StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

@@ -2,6 +2,8 @@ using Common.Repositories;
 using Confluent.Kafka;
 using System.Net;
 using System.Net.Mail;
+using Common.Kafka.Consumer;
+using Common.Kafka.Producer;
 using Domain.Notifications.Messages;
 using Domain.Orders;
 using DomainServices.Notifications.Hosted;
@@ -47,23 +49,8 @@ namespace Presentation
             
             services.AddHostedService<PullUnhandledOrders>();
             services.AddHostedService<HandleOrders>();
-            services.AddHostedService<CreateNotificationsFromOrder>();
             services.AddHostedService<PushNotificationsToKafka>();
-            services.AddHostedService<EmailMessageHandler>();
             
-            services
-                .AddKafkaConfigs(new ProducerConfig() {BootstrapServers = "localhost:9092"})
-                .AddKafkaProducer<string, Order>("orders")
-                .AddKafkaProducer<string, Message>("notifications");
-            
-            services.AddSingleton(p => new ConsumerConfig
-            {
-                GroupId = "dev_1", 
-                BootstrapServers = "localhost:9092",
-                AutoOffsetReset = AutoOffsetReset.Earliest,
-                EnableAutoOffsetStore = false
-            });
-
             services.AddSingleton(p => new SmtpClient
             {
                 Host = "smtp.gmail.com",
@@ -78,6 +65,8 @@ namespace Presentation
                 options => options.UseNpgsql("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A", p => p.MigrationsAssembly(typeof(Context).Assembly.FullName)));
             services.AddSingleton<ISqlConnectionFactory>(
                 p => new SqlConnectionFactory("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A"));
+
+            AddKafka(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,6 +84,39 @@ namespace Presentation
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
+
+        private void AddKafka(IServiceCollection services)
+        {
+            services
+                .AddKafkaConsumer<string, Order, CreateNotificationsFromOrder>()
+                .Configure<KafkaConsumerConfig<string, Order>>(p =>
+                {
+                    p.Topic = "orders";
+                    p.GroupId = "orders_web_dev";
+                    p.BootstrapServers = "localhost:9092";
+                    p.AutoOffsetReset = AutoOffsetReset.Earliest;
+                    p.EnableAutoOffsetStore = false;
+                });
+
+            services
+                .AddKafkaConsumer<string, EmailMessage, SendEmail>()
+                .Configure<KafkaConsumerConfig<string, Order>>(p =>
+                {
+                    p.Topic = "email";
+                    p.GroupId = "email_web_dev";
+                    p.BootstrapServers = "localhost:9092";
+                    p.AutoOffsetReset = AutoOffsetReset.Earliest;
+                    p.EnableAutoOffsetStore = false;
+                });
+
+            services
+                .AddKafkaProducer<string, Order>()
+                .Configure<KafkaProducerConfig<string, Order>>(p =>
+                {
+                    p.Topic = "orders";
+                    p.BootstrapServers = "localhost:9092";
+                });
         }
     }
 }

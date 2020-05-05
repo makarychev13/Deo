@@ -12,12 +12,14 @@ namespace DomainServices.Notifications.Hosted
     public sealed class PushNotificationsToKafka : BaseHostedService
     {
         private readonly OutboxNotificationsRepository _notificationsRepository;
-        private readonly KafkaProducer<string, Message> _producer;
+        private readonly KafkaProducer<string, EmailMessage> _emailProducer;
+        private readonly KafkaProducer<string, TelegramMessage> _telegramProducer;
 
-        public PushNotificationsToKafka(OutboxNotificationsRepository notificationsRepository, KafkaProducer<string, Message> producer)
+        public PushNotificationsToKafka(OutboxNotificationsRepository notificationsRepository, KafkaProducer<string, EmailMessage> emailProducer, KafkaProducer<string, TelegramMessage> telegramProducer)
         {
             _notificationsRepository = notificationsRepository;
-            _producer = producer;
+            _emailProducer = emailProducer;
+            _telegramProducer = telegramProducer;
         }
 
         protected override async Task ExecuteAsync()
@@ -30,7 +32,14 @@ namespace DomainServices.Notifications.Hosted
             
             foreach (Notification notification in notifications)
             {
-                await _producer.ProduceAsync(notification.Transport.ToString(), notification.Message);
+                Task send = notification.Transport switch
+                {
+                    Subscriptions.Email => _emailProducer.ProduceAsync(Subscriptions.Email.ToString(), (EmailMessage)notification.Message),
+                    Subscriptions.Telegram => _telegramProducer.ProduceAsync(Subscriptions.Telegram.ToString(), (TelegramMessage)notification.Message),
+                    _ => throw new ApplicationException($"Не удалось отправить в кафку сообщение типа {notification.Transport}")
+                };
+                
+                await send;
             }
 
             await _notificationsRepository.Handle(notifications.Select(p => p.Id));
