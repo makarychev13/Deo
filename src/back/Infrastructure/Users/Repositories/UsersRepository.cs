@@ -28,8 +28,8 @@ namespace Infrastructure.Users.Repositories
             using (IDbConnection connection = _connectionFactory.BuildConnection())
             {
                 string query = $@"
-                select ""Users"".*
-                from ""Users""
+                select distinct u.""TelegramId"", u.""Active"", u.""Email"", u.""Subscriptions""
+                from ""Users"" u
                     join ""UsersToKeywords"" UTK on ""Users"".""Id"" = UTK.""UserId""
                     join ""Keywords"" k on UTK.""KeywordId"" = k.""Id""
                 where
