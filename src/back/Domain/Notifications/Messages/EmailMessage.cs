@@ -11,5 +11,10 @@ namespace Domain.Notifications.Messages
         {
             Body = body;
         }
+
+        public int GetIdempotencyKey()
+        {
+            return $"{Body.HtmlBody}{To}".GetHashCode();
+        }
     }
 }

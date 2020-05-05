@@ -1,6 +1,7 @@
 using Common.Repositories;
 using Confluent.Kafka;
-using Domain.Notifications;
+using System.Net;
+using System.Net.Mail;
 using Domain.Notifications.Messages;
 using Domain.Orders;
 using DomainServices.Notifications.Hosted;
@@ -35,6 +36,7 @@ namespace Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            
             services.AddSingleton<IOrdersParser, OrdersParser>();
             services.AddSingleton<IOrdersReader, OrdersReader>();
             services.AddSingleton<OrdersRepository>();
@@ -42,14 +44,18 @@ namespace Presentation
             services.AddSingleton<UsersRepository>();
             services.AddSingleton<NotificationsFabric>();
             services.AddSingleton<OutboxNotificationsRepository>();
+            
             services.AddHostedService<PullUnhandledOrders>();
             services.AddHostedService<HandleOrders>();
             services.AddHostedService<CreateNotificationsFromOrder>();
             services.AddHostedService<PushNotificationsToKafka>();
+            services.AddHostedService<EmailMessageHandler>();
+            
             services
                 .AddKafkaConfigs(new ProducerConfig() {BootstrapServers = "localhost:9092"})
                 .AddKafkaProducer<string, Order>("orders")
                 .AddKafkaProducer<string, Message>("notifications");
+            
             services.AddSingleton(p => new ConsumerConfig
             {
                 GroupId = "dev_1", 
@@ -57,6 +63,17 @@ namespace Presentation
                 AutoOffsetReset = AutoOffsetReset.Earliest,
                 EnableAutoOffsetStore = false
             });
+
+            services.AddSingleton(p => new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential("", "")
+            });
+            
             services.AddDbContext<Context>(
                 options => options.UseNpgsql("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A", p => p.MigrationsAssembly(typeof(Context).Assembly.FullName)));
             services.AddSingleton<ISqlConnectionFactory>(

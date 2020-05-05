@@ -16,11 +16,10 @@ namespace Domain.Notifications.Messages.ValueObjects
 
         public static EmailBody CreateFrom(Order order)
         {
-            string subject = order.Body.Title;
-            string htmlBody = $@"
-            <b>{order.Body.Title}<b>
-            <br>
+            string subject = $"{order.Body.Title} [{order.Source.Name}]";
+            string htmlBody = $@"         
             {order.Body.Description}
+            <br>
             <a href='{order.Body.Link}'>Подробнее</a>";
             
             return new EmailBody(subject, htmlBody);

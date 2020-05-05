@@ -20,9 +20,8 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 var config = sp.GetRequiredService<ProducerConfig>();
                 var builder = new ProducerBuilder<Tk, Tv>(config)
-                    .SetValueSerializer(new KafkaSerializer<Tv>())
-                    .SetKeySerializer(new KafkaSerializer<Tk>());
-
+                    .SetValueSerializer(new KafkaSerializer<Tv>());
+                
                 return builder.Build();
             });
 
