@@ -2,18 +2,20 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Confluent.Kafka;
-using Confluent.Kafka.SyncOverAsync;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace Common.Kafka.Consumer
 {
-    public abstract class KafkaConsumer<TK, TV> : BackgroundService
+    internal sealed class BackgroundKafkaConsumer<TK, TV> : BackgroundService
     {
-        private readonly ConsumerConfig _options;
+        private readonly KafkaConsumerConfig<TK, TV> _config;
+        private readonly IKafkaHandler<TK, TV> _handler;
 
-        protected KafkaConsumer(ConsumerConfig options)
+        public BackgroundKafkaConsumer(IOptions<KafkaConsumerConfig<TK, TV>> config, IKafkaHandler<TK, TV> handler)
         {
-            _options = options;
+            _handler = handler;
+            _config = config.Value;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -25,29 +27,23 @@ namespace Common.Kafka.Consumer
                 TaskScheduler.Current).ContinueWith(p => { throw p.Exception; }, TaskContinuationOptions.OnlyOnFaulted);
         }
 
-        protected void ExecuteCore(CancellationToken stoppingToken)
+        public void ExecuteCore(CancellationToken stoppingToken)
         {
-            var builder = new ConsumerBuilder<TK, TV>(_options).SetValueDeserializer(new KafkaDeserializer<TV>());
+            var builder = new ConsumerBuilder<TK, TV>(_config).SetValueDeserializer(new KafkaDeserializer<TV>());
             using (IConsumer<TK, TV> consumer = builder.Build())
             {
-                consumer.Subscribe(Topic);
+                consumer.Subscribe(_config.Topic);
 
                 while (!stoppingToken.IsCancellationRequested)
                 {
                     ConsumeResult<TK, TV> result = consumer.Consume(TimeSpan.FromMilliseconds(1000));
-                    if (result != null && NeedConsume(result.Key, result.Value))
+                    if (result != null)
                     {
-                        ConsumeAsync(result.Key, result.Value).GetAwaiter().GetResult();
+                        _handler.HandleAsync(result.Key, result.Value).GetAwaiter().GetResult();
                         consumer.StoreOffset(result);
                     }
                 }
             }
         }
-
-        protected abstract Task ConsumeAsync(TK key, TV message);
-
-        protected abstract bool NeedConsume(TK key, TV message);
-
-        protected abstract string Topic { get; }
     }
 }

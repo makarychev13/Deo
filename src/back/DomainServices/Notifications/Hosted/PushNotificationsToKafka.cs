@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Common.HostedServices;
 using Common.Kafka.Producer;
 using Domain.Notifications;
-using Domain.Notifications.Messages;
 using Infrastructure.Notifications.Repositories;
 
 namespace DomainServices.Notifications.Hosted
@@ -12,12 +11,12 @@ namespace DomainServices.Notifications.Hosted
     public sealed class PushNotificationsToKafka : BaseHostedService
     {
         private readonly OutboxNotificationsRepository _notificationsRepository;
-        private readonly KafkaProducer<string, Message> _producer;
+        private readonly KafkaProducer<string, Notification> _notificationProducer;
 
-        public PushNotificationsToKafka(OutboxNotificationsRepository notificationsRepository, KafkaProducer<string, Message> producer)
+        public PushNotificationsToKafka(OutboxNotificationsRepository notificationsRepository, KafkaProducer<string, Notification> notificationProducer)
         {
             _notificationsRepository = notificationsRepository;
-            _producer = producer;
+            _notificationProducer = notificationProducer;
         }
 
         protected override async Task ExecuteAsync()
@@ -30,7 +29,7 @@ namespace DomainServices.Notifications.Hosted
             
             foreach (Notification notification in notifications)
             {
-                await _producer.ProduceAsync(notification.Transport.ToString(), notification.Message);
+                await _notificationProducer.ProduceAsync(notification.Transport.ToString(), notification);
             }
 
             await _notificationsRepository.Handle(notifications.Select(p => p.Id));

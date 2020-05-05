@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 using Common.Repositories;
 using Dapper;
 using Domain.Notifications;
-using Domain.Notifications.Messages;
 using Migrations.Tables.OutboxNotifications;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Infrastructure.Notifications.Repositories
 {
