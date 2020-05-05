@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Confluent.Kafka;
+﻿using System.Collections.Generic;
 using Domain.Notifications;
-using Domain.Notifications.Messages;
-using Domain.Notifications.Messages.ValueObjects;
 using Domain.Orders;
 using Domain.Users;
-using Domain.Users.ValueObjects;
 
 namespace Infrastructure.Notifications
 {
@@ -16,21 +11,21 @@ namespace Infrastructure.Notifications
         {
             var messages = new Dictionary<Subscriptions, List<Message>>()
             {
-                { Subscriptions.Email, new List<Message>() },
-                { Subscriptions.Telegram, new List<Message>() },
-                { Subscriptions.Vk, new List<Message>() }
+                {Subscriptions.Email, new List<Message>()},
+                {Subscriptions.Telegram, new List<Message>()},
+                {Subscriptions.Vk, new List<Message>()}
             };
 
             foreach (var user in users)
             {
                 if (user.Subscriptions == Subscriptions.Email)
                 {
-                    messages[Subscriptions.Email].Add(new EmailMessage(user.Contact.Email, EmailBody.CreateFrom(order)));
+                    messages[Subscriptions.Email].Add(new Message(user.Contact.Email, order.Body.Title, order.Body.Description));
                 }
 
                 if (user.Subscriptions == Subscriptions.Telegram)
                 {
-                    messages[Subscriptions.Telegram].Add(new TelegramMessage(user.Contact.TelegramId, TelegramBody.CreateFrom(order)));
+                    messages[Subscriptions.Telegram].Add(new Message(user.Contact.TelegramId, "subject", "body"));
                 }
             }
 

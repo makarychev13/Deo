@@ -4,12 +4,13 @@ using System.Net;
 using System.Net.Mail;
 using Common.Kafka.Consumer;
 using Common.Kafka.Producer;
-using Domain.Notifications.Messages;
+using Domain.Notifications;
 using Domain.Orders;
 using DomainServices.Notifications.Hosted;
 using DomainServices.Notifications.Kafka;
 using DomainServices.Orders.Hosted;
 using Infrastructure.Notifications;
+using Infrastructure.Notifications.KafkaProducers;
 using Infrastructure.Notifications.Repositories;
 using Infrastructure.Orders.Repositories;
 using Infrastructure.Orders.Rss.Parser;
@@ -100,23 +101,30 @@ namespace Presentation
                 });
 
             services
-                .AddKafkaConsumer<string, EmailMessage, SendEmail>()
-                .Configure<KafkaConsumerConfig<string, Order>>(p =>
+                .Configure<KafkaConsumerConfig<string, Notification>>(p =>
                 {
                     p.Topic = "email";
                     p.GroupId = "email_web_dev";
                     p.BootstrapServers = "localhost:9092";
                     p.AutoOffsetReset = AutoOffsetReset.Earliest;
                     p.EnableAutoOffsetStore = false;
-                });
+                })
+                .AddKafkaConsumer<string, Notification, SendEmail>();
 
             services
-                .AddKafkaProducer<string, Order>()
                 .Configure<KafkaProducerConfig<string, Order>>(p =>
                 {
                     p.Topic = "orders";
                     p.BootstrapServers = "localhost:9092";
-                });
+                })
+                .AddKafkaProducer<string, Order>();
+
+            services
+                .Configure<KafkaProducerConfig<string, Notification>>(p =>
+                {
+                    p.BootstrapServers = "localhost:9092";
+                })
+                .AddKafkaProducer<string, Notification, NotificationKafkaProducer>();
         }
     }
 }

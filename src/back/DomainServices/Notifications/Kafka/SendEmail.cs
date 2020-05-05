@@ -1,13 +1,11 @@
-﻿using System;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 using System.Threading.Tasks;
 using Common.Kafka.Consumer;
-using Confluent.Kafka;
-using Domain.Notifications.Messages;
+using Domain.Notifications;
 
 namespace DomainServices.Notifications.Kafka
 {
-    public sealed class SendEmail : IKafkaHandler<string, EmailMessage>
+    public sealed class SendEmail : IKafkaHandler<string, Notification>
     {
         private readonly SmtpClient _smtpClient;
         
@@ -16,12 +14,12 @@ namespace DomainServices.Notifications.Kafka
             _smtpClient = smtpClient;
         }
         
-        public async Task HandleAsync(string key, EmailMessage message)
+        public async Task HandleAsync(string key, Notification message)
         {
-            var eMailMessage = new MailMessage("makar.tula@gmail.com", message.To)
+            var eMailMessage = new MailMessage("makar.tula@gmail.com", message.Message.To)
             {
-                Subject = message.Body.Subject,
-                Body = message.Body.HtmlBody,
+                Subject = message.Message.Subject,
+                Body = message.Message.Body,
                 IsBodyHtml = true
             };
             
