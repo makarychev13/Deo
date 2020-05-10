@@ -1,5 +1,4 @@
 using Common.Repositories;
-using Confluent.Kafka;
 using System.Net;
 using System.Net.Mail;
 using Common.Kafka.Consumer;
