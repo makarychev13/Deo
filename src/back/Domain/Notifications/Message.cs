@@ -1,6 +1,6 @@
 ﻿namespace Domain.Notifications
 {
-    public class Message
+    public sealed class Message
     {
         public readonly string To;
         public readonly string Subject;

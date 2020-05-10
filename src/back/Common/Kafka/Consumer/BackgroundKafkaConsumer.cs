@@ -32,16 +32,19 @@ namespace Common.Kafka.Consumer
             var builder = new ConsumerBuilder<TK, TV>(_config).SetValueDeserializer(new KafkaDeserializer<TV>());
             using (IConsumer<TK, TV> consumer = builder.Build())
             {
-                consumer.Subscribe(_config.Topic);
-
-                while (!stoppingToken.IsCancellationRequested)
+                if (_config.Active)
                 {
-                    ConsumeResult<TK, TV> result = consumer.Consume(TimeSpan.FromMilliseconds(1000));
-                    if (result != null)
+                    consumer.Subscribe(_config.Topic);
+
+                    while (!stoppingToken.IsCancellationRequested)
                     {
-                        _handler.HandleAsync(result.Key, result.Value).GetAwaiter().GetResult();
-                        consumer.StoreOffset(result);
-                    }
+                        ConsumeResult<TK, TV> result = consumer.Consume(TimeSpan.FromMilliseconds(1000));
+                        if (result != null)
+                        {
+                            _handler.HandleAsync(result.Key, result.Value).GetAwaiter().GetResult();
+                            consumer.StoreOffset(result);
+                        } 
+                    }   
                 }
             }
         }

@@ -1,20 +1,20 @@
 ﻿using System.Net.Mail;
 using System.Threading.Tasks;
 using Common.Kafka.Consumer;
-using Domain.Notifications;
+using DomainServices.Notifications.Kafka.Contracts;
 
 namespace DomainServices.Notifications.Kafka
 {
-    public sealed class SendEmail : IKafkaHandler<string, Notification>
+    public sealed class SendToEmail : IKafkaHandler<string, EmailNotification>
     {
         private readonly SmtpClient _smtpClient;
         
-        public SendEmail(SmtpClient smtpClient)
+        public SendToEmail(SmtpClient smtpClient)
         {
             _smtpClient = smtpClient;
         }
         
-        public async Task HandleAsync(string key, Notification message)
+        public async Task HandleAsync(string key, EmailNotification message)
         {
             var eMailMessage = new MailMessage("makar.tula@gmail.com", message.Message.To)
             {

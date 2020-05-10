@@ -30,11 +30,11 @@ namespace Infrastructure.Users.Repositories
                 string query = $@"
                 select distinct u.""TelegramId"", u.""Active"", u.""Email"", u.""Subscriptions""
                 from ""Users"" u
-                    join ""UsersToKeywords"" UTK on ""Users"".""Id"" = UTK.""UserId""
+                    join ""UsersToKeywords"" UTK on u.""Id"" = UTK.""UserId""
                     join ""Keywords"" k on UTK.""KeywordId"" = k.""Id""
                 where
-                    ""Active"" = true
-                    and (""TelegramId"" is not null or ""Email"" is not null)";
+                    u.""Active"" = true
+                    and (u.""TelegramId"" is not null or u.""Email"" is not null)";
 
                 IEnumerable<UserEntity> result = await connection.QueryAsync<UserEntity>(query, new
                 {

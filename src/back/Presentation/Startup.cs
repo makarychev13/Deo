@@ -8,6 +8,7 @@ using Domain.Notifications;
 using Domain.Orders;
 using DomainServices.Notifications.Hosted;
 using DomainServices.Notifications.Kafka;
+using DomainServices.Notifications.Kafka.Contracts;
 using DomainServices.Orders.Hosted;
 using Infrastructure.Notifications;
 using Infrastructure.Notifications.KafkaProducers;
@@ -23,6 +24,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Migrations;
+using Telegram.Bot;
 
 namespace Presentation
 {
@@ -61,6 +63,8 @@ namespace Presentation
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential("", "")
             });
+
+            services.AddSingleton<ITelegramBotClient>(p => new TelegramBotClient("1274241939:AAHeDslxvGOlEDRFcyW9wlQW9qc31ZBxJZw"));
             
             services.AddDbContext<Context>(
                 options => options.UseNpgsql("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A", p => p.MigrationsAssembly(typeof(Context).Assembly.FullName)));
@@ -96,35 +100,41 @@ namespace Presentation
                     p.Topic = "orders";
                     p.GroupId = "orders_web_dev";
                     p.BootstrapServers = "localhost:9092";
-                    p.AutoOffsetReset = AutoOffsetReset.Earliest;
-                    p.EnableAutoOffsetStore = false;
                 });
 
             services
-                .Configure<KafkaConsumerConfig<string, Notification>>(p =>
+                .AddKafkaConsumer<string, EmailNotification, SendToEmail>()
+                .Configure<KafkaConsumerConfig<string, EmailNotification>>(p =>
                 {
                     p.Topic = "email";
                     p.GroupId = "email_web_dev";
                     p.BootstrapServers = "localhost:9092";
-                    p.AutoOffsetReset = AutoOffsetReset.Earliest;
-                    p.EnableAutoOffsetStore = false;
-                })
-                .AddKafkaConsumer<string, Notification, SendEmail>();
+                    p.Active = false;
+                });
 
             services
+                .AddKafkaConsumer<string, TelegramNotification, SendToTelegram>()
+                .Configure<KafkaConsumerConfig<string, TelegramNotification>>(p =>
+                {
+                    p.Topic = "telegram";
+                    p.GroupId = "telegram_web_dev";
+                    p.BootstrapServers = "localhost:9092";
+                });
+
+            services
+                .AddKafkaProducer<string, Order>()
                 .Configure<KafkaProducerConfig<string, Order>>(p =>
                 {
                     p.Topic = "orders";
                     p.BootstrapServers = "localhost:9092";
-                })
-                .AddKafkaProducer<string, Order>();
+                });
 
             services
+                .AddKafkaProducer<string, Notification, NotificationKafkaProducer>()
                 .Configure<KafkaProducerConfig<string, Notification>>(p =>
                 {
                     p.BootstrapServers = "localhost:9092";
-                })
-                .AddKafkaProducer<string, Notification, NotificationKafkaProducer>();
+                });
         }
     }
 }

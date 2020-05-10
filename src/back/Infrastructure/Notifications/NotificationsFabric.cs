@@ -25,7 +25,7 @@ namespace Infrastructure.Notifications
 
                 if (user.Subscriptions == Subscriptions.Telegram)
                 {
-                    messages[Subscriptions.Telegram].Add(new Message(user.Contact.TelegramId, "subject", "body"));
+                    messages[Subscriptions.Telegram].Add(new Message(user.Contact.TelegramId, order.Body.Title, order.Body.Description));
                 }
             }
 
