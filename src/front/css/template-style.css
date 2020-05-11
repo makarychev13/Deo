@@ -605,6 +605,20 @@ aside.aside-left {
   border: 1px solid #fff;
   box-shadow: none;
 }
+
+.button-invariant {
+  background: #fff !important; 
+  border: 1px solid #fff !important;
+  color: #002633 !important;
+  box-shadow: none;
+}
+
+.button-invariant:hover {
+  background: none !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
 .button.button-white-stroke:hover, a.button.button-white-stroke:hover,
 .primary-color-white .button.button-primary-stroke:hover, .primary-color-white a.button.button-primary-stroke:hover {
   background: #fff none repeat scroll 0 0;
