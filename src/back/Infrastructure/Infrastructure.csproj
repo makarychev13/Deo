@@ -6,12 +6,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Common\Common.csproj" />
-      <ProjectReference Include="..\Migrations\Migrations.csproj" />
+        <ProjectReference Include="..\Common\Common.csproj" />
+        <ProjectReference Include="..\Migrations\Migrations.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Dapper" Version="2.0.30" />
+        <PackageReference Include="Dapper" Version="2.0.30" />
+        <PackageReference Include="MediatR" Version="8.0.1" />
     </ItemGroup>
 
 </Project>
