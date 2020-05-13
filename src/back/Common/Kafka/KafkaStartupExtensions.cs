@@ -1,3 +1,4 @@
+using System;
 using Common.Kafka;
 using Common.Kafka.Consumer;
 using Common.Kafka.Producer;
@@ -8,28 +9,34 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class KafkaStartupExtensions
     {
-        public static IServiceCollection AddKafkaConsumer<TK, TV, THandler>(this IServiceCollection services)
+        public static IServiceCollection AddKafkaConsumer<TK, TV, THandler>(this IServiceCollection services, Action<KafkaConsumerConfig<TK, TV>> configAction)
             where THandler : class, IKafkaHandler<TK, TV>
         {
             services.AddSingleton<IKafkaHandler<TK, TV>, THandler>();
             services.AddHostedService<BackgroundKafkaConsumer<TK, TV>>();
 
+            services.Configure(configAction);
+
             return services;
         }
 
-        public static IServiceCollection AddKafkaProducer<TK, TV>(this IServiceCollection services)
+        public static IServiceCollection AddKafkaProducer<TK, TV>(this IServiceCollection services, Action<KafkaProducerConfig<TK, TV>> configAction)
         {
             services.AddConfluentKafkaProducer<TK, TV>();
             services.AddSingleton<KafkaProducer<TK, TV>>();
 
+            services.Configure(configAction);
+
             return services;
         }
 
-        public static IServiceCollection AddKafkaProducer<TK, TV, THandler>(this IServiceCollection services)
+        public static IServiceCollection AddKafkaProducer<TK, TV, THandler>(this IServiceCollection services, Action<KafkaProducerConfig<TK, TV>> configAction)
             where THandler : KafkaProducer<TK, TV>
         {
             services.AddConfluentKafkaProducer<TK, TV>();
             services.AddSingleton<KafkaProducer<TK, TV>, THandler>();
+            
+            services.Configure(configAction);
             
             return services;
         }

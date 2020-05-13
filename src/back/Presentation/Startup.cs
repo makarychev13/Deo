@@ -1,8 +1,6 @@
 using Common.Repositories;
 using System.Net;
 using System.Net.Mail;
-using Common.Kafka.Consumer;
-using Common.Kafka.Producer;
 using Domain.Notifications;
 using Domain.Orders;
 using DomainServices.Notifications.Hosted;
@@ -40,7 +38,7 @@ namespace Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
+
             services.AddSingleton<IOrdersParser, OrdersParser>();
             services.AddSingleton<IOrdersReader, OrdersReader>();
             services.AddSingleton<OrdersRepository>();
@@ -48,11 +46,11 @@ namespace Presentation
             services.AddSingleton<UsersRepository>();
             services.AddSingleton<NotificationsFabric>();
             services.AddSingleton<OutboxNotificationsRepository>();
-            
+
             services.AddHostedService<PullUnhandledOrders>();
             services.AddHostedService<HandleOrders>();
             services.AddHostedService<PushNotificationsToKafka>();
-            
+
             services.AddSingleton(p => new SmtpClient
             {
                 Host = "smtp.gmail.com",
@@ -63,12 +61,16 @@ namespace Presentation
                 Credentials = new NetworkCredential("", "")
             });
 
-            services.AddSingleton<ITelegramBotClient>(p => new TelegramBotClient("1274241939:AAHeDslxvGOlEDRFcyW9wlQW9qc31ZBxJZw"));
-            
+            services.AddSingleton<ITelegramBotClient>(p =>
+                new TelegramBotClient("1274241939:AAHeDslxvGOlEDRFcyW9wlQW9qc31ZBxJZw"));
+
             services.AddDbContext<Context>(
-                options => options.UseNpgsql("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A", p => p.MigrationsAssembly(typeof(Context).Assembly.FullName)));
+                options => options.UseNpgsql("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A",
+                    p => p.MigrationsAssembly(typeof(Context).Assembly.FullName)));
             services.AddSingleton<ISqlConnectionFactory>(
                 p => new SqlConnectionFactory("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A"));
+
+            services.AddEventBus();
 
             AddKafka(services);
         }
@@ -92,48 +94,38 @@ namespace Presentation
 
         private void AddKafka(IServiceCollection services)
         {
-            services
-                .AddKafkaConsumer<string, Order, CreateNotificationsFromOrder>()
-                .Configure<KafkaConsumerConfig<string, Order>>(p =>
-                {
-                    p.Topic = "orders";
-                    p.GroupId = "orders_web_dev";
-                    p.BootstrapServers = "localhost:9092";
-                });
+            services.AddKafkaConsumer<string, Order, CreateNotificationsFromOrder>(p =>
+            {
+                p.Topic = "orders";
+                p.GroupId = "orders_web_dev";
+                p.BootstrapServers = "localhost:9092";
+            });
 
-            services
-                .AddKafkaConsumer<string, EmailNotification, SendToEmail>()
-                .Configure<KafkaConsumerConfig<string, EmailNotification>>(p =>
-                {
-                    p.Topic = "email";
-                    p.GroupId = "email_web_dev";
-                    p.BootstrapServers = "localhost:9092";
-                    p.Active = false;
-                });
+            services.AddKafkaConsumer<string, EmailNotification, SendToEmail>(p =>
+            {
+                p.Topic = "email";
+                p.GroupId = "email_web_dev";
+                p.BootstrapServers = "localhost:9092";
+                p.Active = false;
+            });
 
-            services
-                .AddKafkaConsumer<string, TelegramNotification, SendToTelegram>()
-                .Configure<KafkaConsumerConfig<string, TelegramNotification>>(p =>
-                {
-                    p.Topic = "telegram";
-                    p.GroupId = "telegram_web_dev";
-                    p.BootstrapServers = "localhost:9092";
-                });
+            services.AddKafkaConsumer<string, TelegramNotification, SendToTelegram>(p =>
+            {
+                p.Topic = "telegram";
+                p.GroupId = "telegram_web_dev";
+                p.BootstrapServers = "localhost:9092";
+            });
 
-            services
-                .AddKafkaProducer<string, Order>()
-                .Configure<KafkaProducerConfig<string, Order>>(p =>
-                {
-                    p.Topic = "orders";
-                    p.BootstrapServers = "localhost:9092";
-                });
+            services.AddKafkaProducer<string, Order>(p =>
+            {
+                p.Topic = "orders";
+                p.BootstrapServers = "localhost:9092";
+            });
 
-            services
-                .AddKafkaProducer<string, Notification, NotificationKafkaProducer>()
-                .Configure<KafkaProducerConfig<string, Notification>>(p =>
-                {
-                    p.BootstrapServers = "localhost:9092";
-                });
+            services.AddKafkaProducer<string, Notification, NotificationKafkaProducer>(p =>
+            {
+                p.BootstrapServers = "localhost:9092";
+            });
         }
     }
 }
