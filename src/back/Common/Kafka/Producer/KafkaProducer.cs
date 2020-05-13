@@ -5,12 +5,12 @@ using Microsoft.Extensions.Options;
 
 namespace Common.Kafka.Producer
 {
-    public sealed class KafkaProducer<Tk, Tv> : IDisposable
+    public class KafkaProducer<Tk, Tv> : IDisposable
     {
         private readonly IProducer<Tk, Tv> _producer;
         private readonly string _topic;
 
-        public KafkaProducer(IOptions<KafkaProducerOptions> topicOptions, IProducer<Tk, Tv> producer)
+        public KafkaProducer(IOptions<KafkaProducerConfig<Tk, Tv>> topicOptions, IProducer<Tk, Tv> producer)
         {
             _topic = topicOptions.Value.Topic;
             _producer = producer;
@@ -23,7 +23,12 @@ namespace Common.Kafka.Producer
 
         public async Task ProduceAsync(Tk key, Tv value)
         {
-            await _producer.ProduceAsync(_topic, new Message<Tk, Tv> {Key = key, Value = value});
+            await _producer.ProduceAsync(GetTopic(key, value), new Message<Tk, Tv> {Key = key, Value = value});
+        }
+
+        public virtual string GetTopic(Tk key, Tv value)
+        {
+            return _topic;
         }
     }
 }

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Common.Kafka
 {
-    public sealed class KafkaSerializer<T> : ISerializer<T>
+    internal sealed class KafkaSerializer<T> : ISerializer<T>
     {
         public byte[] Serialize(T data, SerializationContext context)
         {

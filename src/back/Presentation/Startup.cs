@@ -1,10 +1,14 @@
 using Common.Repositories;
-using Confluent.Kafka;
+using System.Net;
+using System.Net.Mail;
+using Domain.Notifications;
 using Domain.Orders;
 using DomainServices.Notifications.Hosted;
 using DomainServices.Notifications.Kafka;
+using DomainServices.Notifications.Kafka.Contracts;
 using DomainServices.Orders.Hosted;
 using Infrastructure.Notifications;
+using Infrastructure.Notifications.KafkaProducers;
 using Infrastructure.Notifications.Repositories;
 using Infrastructure.Orders.Repositories;
 using Infrastructure.Orders.Rss.Parser;
@@ -17,6 +21,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Migrations;
+using Telegram.Bot;
 
 namespace Presentation
 {
@@ -33,6 +38,7 @@ namespace Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddSingleton<IOrdersParser, OrdersParser>();
             services.AddSingleton<IOrdersReader, OrdersReader>();
             services.AddSingleton<OrdersRepository>();
@@ -40,24 +46,33 @@ namespace Presentation
             services.AddSingleton<UsersRepository>();
             services.AddSingleton<NotificationsFabric>();
             services.AddSingleton<OutboxNotificationsRepository>();
+
             services.AddHostedService<PullUnhandledOrders>();
             services.AddHostedService<HandleOrders>();
-            services.AddHostedService<CreateNotificationsFromOrder>();
             services.AddHostedService<PushNotificationsToKafka>();
-            services
-                .AddKafkaConfigs(new ProducerConfig() {BootstrapServers = "localhost:9092"})
-                .AddKafkaProducer<string, Order>("orders");
-            services.AddSingleton(p => new ConsumerConfig
+
+            services.AddSingleton(p => new SmtpClient
             {
-                GroupId = "dev_1", 
-                BootstrapServers = "localhost:9092",
-                AutoOffsetReset = AutoOffsetReset.Earliest,
-                EnableAutoOffsetStore = false
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential("", "")
             });
+
+            services.AddSingleton<ITelegramBotClient>(p =>
+                new TelegramBotClient("1274241939:AAHeDslxvGOlEDRFcyW9wlQW9qc31ZBxJZw"));
+
             services.AddDbContext<Context>(
-                options => options.UseNpgsql("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A", p => p.MigrationsAssembly(typeof(Context).Assembly.FullName)));
+                options => options.UseNpgsql("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A",
+                    p => p.MigrationsAssembly(typeof(Context).Assembly.FullName)));
             services.AddSingleton<ISqlConnectionFactory>(
                 p => new SqlConnectionFactory("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A"));
+
+            services.AddEventBus();
+
+            AddKafka(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,6 +90,42 @@ namespace Presentation
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
+
+        private void AddKafka(IServiceCollection services)
+        {
+            services.AddKafkaConsumer<string, Order, CreateNotificationsFromOrder>(p =>
+            {
+                p.Topic = "orders";
+                p.GroupId = "orders_web_dev";
+                p.BootstrapServers = "localhost:9092";
+            });
+
+            services.AddKafkaConsumer<string, EmailNotification, SendToEmail>(p =>
+            {
+                p.Topic = "email";
+                p.GroupId = "email_web_dev";
+                p.BootstrapServers = "localhost:9092";
+                p.Active = false;
+            });
+
+            services.AddKafkaConsumer<string, TelegramNotification, SendToTelegram>(p =>
+            {
+                p.Topic = "telegram";
+                p.GroupId = "telegram_web_dev";
+                p.BootstrapServers = "localhost:9092";
+            });
+
+            services.AddKafkaProducer<string, Order>(p =>
+            {
+                p.Topic = "orders";
+                p.BootstrapServers = "localhost:9092";
+            });
+
+            services.AddKafkaProducer<string, Notification, NotificationKafkaProducer>(p =>
+            {
+                p.BootstrapServers = "localhost:9092";
+            });
         }
     }
 }
