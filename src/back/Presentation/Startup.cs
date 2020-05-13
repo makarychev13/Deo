@@ -3,17 +3,11 @@ using System.Net;
 using System.Net.Mail;
 using Domain.Notifications;
 using Domain.Orders;
-using DomainServices.Notifications.Hosted;
-using DomainServices.Notifications.Kafka;
+using DomainServices.Notifications.Commands.SendToEmail;
 using DomainServices.Notifications.Kafka.Contracts;
-using DomainServices.Orders.Hosted;
-using Infrastructure.Notifications;
+using Infrastructure.Notifications.BackgroundServices;
 using Infrastructure.Notifications.KafkaProducers;
-using Infrastructure.Notifications.Repositories;
-using Infrastructure.Orders.Repositories;
-using Infrastructure.Orders.Rss.Parser;
-using Infrastructure.Orders.Rss.Reader;
-using Infrastructure.Users.Repositories;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +15,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Migrations;
+using Presentation.Ports.BackgroundServices.Orders;
+using Presentation.Ports.Kafka.Notifications;
+using Presentation.Ports.Kafka.Orders;
 using Telegram.Bot;
 
 namespace Presentation
@@ -38,18 +35,13 @@ namespace Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddMediatR(typeof(SendToEmailCommand));
 
-            services.AddSingleton<IOrdersParser, OrdersParser>();
-            services.AddSingleton<IOrdersReader, OrdersReader>();
-            services.AddSingleton<OrdersRepository>();
-            services.AddSingleton<FreelanceBursesRepository>();
-            services.AddSingleton<UsersRepository>();
-            services.AddSingleton<NotificationsFabric>();
-            services.AddSingleton<OutboxNotificationsRepository>();
+            services.AddInfrastructure();
 
-            services.AddHostedService<PullUnhandledOrders>();
-            services.AddHostedService<HandleOrders>();
-            services.AddHostedService<PushNotificationsToKafka>();
+            services.AddHostedService<PullOrdersBackgroundService>();
+            services.AddHostedService<FlushOrdersBackgroundService>();
+            services.AddHostedService<FlushNotificationsBackgroundService>();
 
             services.AddSingleton(p => new SmtpClient
             {
@@ -69,8 +61,6 @@ namespace Presentation
                     p => p.MigrationsAssembly(typeof(Context).Assembly.FullName)));
             services.AddSingleton<ISqlConnectionFactory>(
                 p => new SqlConnectionFactory("Server=localhost;Database=deo;User Id=postgres;Password=lthtdentgkj1A"));
-
-            services.AddEventBus();
 
             AddKafka(services);
         }
@@ -94,14 +84,14 @@ namespace Presentation
 
         private void AddKafka(IServiceCollection services)
         {
-            services.AddKafkaConsumer<string, Order, CreateNotificationsFromOrder>(p =>
+            services.AddKafkaConsumer<string, Order, OrdersHandler>(p =>
             {
                 p.Topic = "orders";
                 p.GroupId = "orders_web_dev";
                 p.BootstrapServers = "localhost:9092";
             });
 
-            services.AddKafkaConsumer<string, EmailNotification, SendToEmail>(p =>
+            services.AddKafkaConsumer<string, EmailNotification, EmailNotificationHandler>(p =>
             {
                 p.Topic = "email";
                 p.GroupId = "email_web_dev";
@@ -109,7 +99,7 @@ namespace Presentation
                 p.Active = false;
             });
 
-            services.AddKafkaConsumer<string, TelegramNotification, SendToTelegram>(p =>
+            services.AddKafkaConsumer<string, TelegramNotification, TelegramNotificationHandler>(p =>
             {
                 p.Topic = "telegram";
                 p.GroupId = "telegram_web_dev";

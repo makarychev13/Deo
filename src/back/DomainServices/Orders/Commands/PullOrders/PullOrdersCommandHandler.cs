@@ -1,31 +1,27 @@
-﻿using System;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using Common.HostedServices;
 using Domain.Orders;
 using Domain.Orders.ValueObjects;
 using Infrastructure.Orders.Repositories;
 using Infrastructure.Orders.Rss.Reader;
+using MediatR;
 
-namespace DomainServices.Orders.Hosted
+namespace DomainServices.Orders.Commands.PullOrders
 {
-    public sealed class PullUnhandledOrders : BaseHostedService
+    public sealed class PullOrdersCommandHandler : INotificationHandler<PullOrdersCommand>
     {
-        protected override TimeSpan Period => TimeSpan.FromMinutes(4);
-
         private readonly FreelanceBursesRepository _freelanceBursesRepository;
         private readonly OrdersRepository _ordersRepository;
         private readonly IOrdersReader _ordersReader;
 
-        public PullUnhandledOrders(
-            FreelanceBursesRepository freelanceBursesRepository,
-            OrdersRepository ordersRepository, IOrdersReader ordersReader)
+        public PullOrdersCommandHandler(FreelanceBursesRepository freelanceBursesRepository, OrdersRepository ordersRepository, IOrdersReader ordersReader)
         {
             _freelanceBursesRepository = freelanceBursesRepository;
             _ordersRepository = ordersRepository;
             _ordersReader = ordersReader;
         }
 
-        protected override async Task ExecuteAsync()
+        public async Task Handle(PullOrdersCommand request, CancellationToken cancellationToken)
         {
             FreelanceBurse[] burses = await _freelanceBursesRepository.GetAll();
             foreach (var burse in burses)
@@ -34,6 +30,5 @@ namespace DomainServices.Orders.Hosted
                 await _ordersRepository.MergePulledOrdersAsync(orders, burse.Id);
             }
         }
-        
     }
 }
