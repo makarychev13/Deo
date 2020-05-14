@@ -108,7 +108,7 @@ span {
 .back-to-top {
   position: fixed;
   display: none;
-  background: #71c55d;
+  background: #6ba5e3;
   line-height: 1;
   color: #fff;
   padding: 7px 12px 13px 12px;
@@ -126,7 +126,7 @@ span {
 }
 
 .back-to-top:focus {
-  background: #71c55d;
+  background: #6ba5e3;
   color: #fff;
   outline: none;
 }
@@ -221,7 +221,7 @@ span {
   font-weight: 700;
   line-height: 56px;
   font-family: "Philosopher", sans-serif;
-  color: #71c55d;
+  color: #6ba5e3;
 }
 
 @media (max-width: 768px) {
@@ -263,14 +263,14 @@ span {
   border-radius: 50px;
   transition: 0.5s;
   margin-bottom: 30px;
-  border: 2px solid #71c55d;
+  border: 2px solid #6ba5e3;
   background: #fff;
-  color: #71c55d;
+  color: #6ba5e3;
   text-decoration: none;
 }
 
 #hero .btn-get-started:hover {
-  background: #71c55d;
+  background: #6ba5e3;
   color: #fff;
 }
 
@@ -560,7 +560,6 @@ body.mobile-nav-active #mobile-nav-toggle i {
   font-weight: 100;
   letter-spacing: 2px;
   margin-bottom: 20px;
-  text-transform: capitalize;
 }
 
 .section-title .separator {
@@ -1146,13 +1145,13 @@ body.mobile-nav-active #mobile-nav-toggle i {
 }
 
 #newsletter .form-control:focus {
-  border-color: #71c55d;
+  border-color: #6ba5e3;
   box-shadow: none;
   outline: 0 none;
 }
 
 #newsletter .btn {
-  background: #71c55d;
+  background: #6ba5e3;
   border: 0;
   border-radius: 0;
   height: 50px;
@@ -1167,7 +1166,7 @@ body.mobile-nav-active #mobile-nav-toggle i {
 }
 
 #newsletter .btn:hover {
-  background: #55b03f;
+  background: #6ba5e3;
 }
 
 #newsletter .btn .fa {
@@ -1181,7 +1180,7 @@ body.mobile-nav-active #mobile-nav-toggle i {
 }
 
 #newsletter ul li {
-  background: #71c55d;
+  background: #6ba5e3;
   border-radius: 50px;
   float: left;
   height: 35px;
@@ -1193,7 +1192,7 @@ body.mobile-nav-active #mobile-nav-toggle i {
 }
 
 #newsletter ul li:hover {
-  background: #55b03f;
+  background: #6ba5e3;
 }
 
 #newsletter ul li .fa {
@@ -1360,5 +1359,5 @@ body.mobile-nav-active #mobile-nav-toggle i {
 
 .footer .copyrights p a, .footer .copyrights .credits a {
   letter-spacing: 0;
-  color: #71c55d;
+  color: #6ba5e3;
 }

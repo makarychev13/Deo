@@ -13,9 +13,9 @@ namespace Common.Kafka.Consumer
     {
         private readonly KafkaConsumerConfig<TK, TV> _config;
         private readonly IKafkaHandler<TK, TV> _handler;
-        private readonly ILogger<TK> _logger;
+        private readonly ILogger _logger;
 
-        public BackgroundKafkaConsumer(IOptions<KafkaConsumerConfig<TK, TV>> config, IKafkaHandler<TK, TV> handler, ILogger<TK> logger = null)
+        public BackgroundKafkaConsumer(IOptions<KafkaConsumerConfig<TK, TV>> config, IKafkaHandler<TK, TV> handler, ILogger logger = null)
         {
             _handler = handler;
             _logger = logger;
