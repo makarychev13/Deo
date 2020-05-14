@@ -1,9 +1,9 @@
 using Common.Repositories;
 using System.Net;
 using System.Net.Mail;
+using System.Reflection;
 using Domain.Notifications;
 using Domain.Orders;
-using DomainServices.Notifications.Commands.SendToEmail;
 using DomainServices.Notifications.Kafka.Contracts;
 using Infrastructure.Notifications.BackgroundServices;
 using Infrastructure.Notifications.KafkaProducers;
@@ -35,7 +35,7 @@ namespace Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddMediatR(typeof(SendToEmailCommand));
+            services.AddMediatR(Assembly.Load("DomainServices"));
 
             services.AddInfrastructure();
 

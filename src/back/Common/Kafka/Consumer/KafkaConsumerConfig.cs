@@ -8,6 +8,7 @@ namespace Common.Kafka.Consumer
         {
             AutoOffsetReset = Confluent.Kafka.AutoOffsetReset.Earliest;
             EnableAutoOffsetStore = false;
+            EnableAutoCommit = true;
         }
 
         public string Topic { get; set; }
