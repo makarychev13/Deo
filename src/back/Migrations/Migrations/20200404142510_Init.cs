@@ -1,5 +1,7 @@
 ﻿using System;
+
 using Microsoft.EntityFrameworkCore.Migrations;
+
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Migrations.Migrations
@@ -9,22 +11,19 @@ namespace Migrations.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "FreelanceBurses",
-                columns: table => new
+                "FreelanceBurses",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Link = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FreelanceBurses", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_FreelanceBurses", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
+                "Orders",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
@@ -39,26 +38,24 @@ namespace Migrations.Migrations
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_FreelanceBurses_FreelanceBurseId",
-                        column: x => x.FreelanceBurseId,
-                        principalTable: "FreelanceBurses",
-                        principalColumn: "Id",
+                        "FK_Orders_FreelanceBurses_FreelanceBurseId",
+                        x => x.FreelanceBurseId,
+                        "FreelanceBurses",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_FreelanceBurseId",
-                table: "Orders",
-                column: "FreelanceBurseId");
+                "IX_Orders_FreelanceBurseId",
+                "Orders",
+                "FreelanceBurseId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Orders");
+            migrationBuilder.DropTable("Orders");
 
-            migrationBuilder.DropTable(
-                name: "FreelanceBurses");
+            migrationBuilder.DropTable("FreelanceBurses");
         }
     }
 }

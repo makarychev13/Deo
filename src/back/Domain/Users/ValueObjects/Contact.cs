@@ -2,8 +2,8 @@
 {
     public sealed class Contact
     {
-        public readonly string TelegramId;
         public readonly string Email;
+        public readonly string TelegramId;
 
         public Contact(string telegramId, string email)
         {

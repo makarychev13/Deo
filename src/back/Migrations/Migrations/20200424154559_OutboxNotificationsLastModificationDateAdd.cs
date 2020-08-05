@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Migrations.Migrations
@@ -8,8 +9,8 @@ namespace Migrations.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<DateTime>(
-                name: "LastModificationDate",
-                table: "OutboxNotifications",
+                "LastModificationDate",
+                "OutboxNotifications",
                 nullable: false,
                 defaultValueSql: "now()");
         }
@@ -17,8 +18,8 @@ namespace Migrations.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "LastModificationDate",
-                table: "OutboxNotifications");
+                "LastModificationDate",
+                "OutboxNotifications");
         }
     }
 }

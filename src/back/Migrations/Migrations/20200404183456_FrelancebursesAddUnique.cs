@@ -7,27 +7,27 @@ namespace Migrations.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateIndex(
-                name: "IX_FreelanceBurses_Link",
-                table: "FreelanceBurses",
-                column: "Link",
+                "IX_FreelanceBurses_Link",
+                "FreelanceBurses",
+                "Link",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_FreelanceBurses_Name",
-                table: "FreelanceBurses",
-                column: "Name",
+                "IX_FreelanceBurses_Name",
+                "FreelanceBurses",
+                "Name",
                 unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropIndex(
-                name: "IX_FreelanceBurses_Link",
-                table: "FreelanceBurses");
+                "IX_FreelanceBurses_Link",
+                "FreelanceBurses");
 
             migrationBuilder.DropIndex(
-                name: "IX_FreelanceBurses_Name",
-                table: "FreelanceBurses");
+                "IX_FreelanceBurses_Name",
+                "FreelanceBurses");
         }
     }
 }

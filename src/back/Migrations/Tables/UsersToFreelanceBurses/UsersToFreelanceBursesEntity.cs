@@ -8,8 +8,8 @@ namespace Migrations.Tables.UsersToFreelanceBurses
         public int Id { get; set; }
         public int UserId { get; set; }
         public int FreelanceBurseId { get; set; }
-        
+
         public UserEntity User { get; set; }
-        public FreelanceBurseEntity FreelanceBurse { get; set;}
+        public FreelanceBurseEntity FreelanceBurse { get; set; }
     }
 }

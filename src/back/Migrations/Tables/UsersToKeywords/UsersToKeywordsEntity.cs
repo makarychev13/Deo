@@ -9,7 +9,7 @@ namespace Migrations.Tables.UsersToKeywords
         public int UserId { get; set; }
         public int KeywordId { get; set; }
         public bool Include { get; set; }
-        
+
         public UserEntity User { get; set; }
         public KeywordEntity Keyword { get; set; }
     }

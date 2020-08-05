@@ -18,7 +18,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton<UsersRepository>();
             services.AddSingleton<NotificationsFabric>();
             services.AddSingleton<OutboxNotificationsRepository>();
-            
+
             services.AddEventBus();
 
             return services;

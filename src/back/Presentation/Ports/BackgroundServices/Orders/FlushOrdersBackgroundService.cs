@@ -1,8 +1,10 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
+
 using Common.HostedServices;
+
 using DomainServices.Orders.Commands.FlushOrders;
+
 using MediatR;
 
 namespace Presentation.Ports.BackgroundServices.Orders
@@ -16,11 +18,11 @@ namespace Presentation.Ports.BackgroundServices.Orders
             _mediator = mediator;
         }
 
+        protected override TimeSpan Period => TimeSpan.FromMinutes(2);
+
         protected override async Task ExecuteAsync()
         {
-            await _mediator.Publish(new FlushOrdersCommand());
+            await _mediator.Send(new FlushOrdersCommand());
         }
-
-        protected override TimeSpan Period => TimeSpan.FromMinutes(2);
     }
 }

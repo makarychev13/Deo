@@ -1,7 +1,11 @@
 ﻿using System;
+
 using Common.Kafka.Producer;
+
 using Confluent.Kafka;
+
 using Domain.Notifications;
+
 using Microsoft.Extensions.Options;
 
 namespace Infrastructure.Notifications.KafkaProducers
@@ -15,20 +19,24 @@ namespace Infrastructure.Notifications.KafkaProducers
         public override string GetTopic(string key, Notification value)
         {
             string topic;
+
             if (key.Equals(Subscriptions.Email.ToString(), StringComparison.InvariantCultureIgnoreCase))
             {
                 topic = "email";
-            } else if (key.Equals(Subscriptions.Telegram.ToString(), StringComparison.InvariantCultureIgnoreCase))
+            }
+            else if (key.Equals(Subscriptions.Telegram.ToString(), StringComparison.InvariantCultureIgnoreCase))
             {
                 topic = "telegram";
-            } else if (key.Equals(Subscriptions.Vk.ToString(), StringComparison.InvariantCultureIgnoreCase))
+            }
+            else if (key.Equals(Subscriptions.Vk.ToString(), StringComparison.InvariantCultureIgnoreCase))
             {
                 topic = "vk";
-            } else
+            }
+            else
             {
                 throw new ApplicationException($"Не удалось сопоставить топик для сообщения типа ${key}");
             }
-            
+
             return topic;
         }
     }

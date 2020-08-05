@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
+
 using Confluent.Kafka;
+
 using Newtonsoft.Json;
 
 namespace Common.Kafka
@@ -23,7 +25,7 @@ namespace Common.Kafka
             {
                 return default;
             }
-            
+
             string exemplar = Encoding.UTF8.GetString(data);
 
             return JsonConvert.DeserializeObject<T>(exemplar);

@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Common.Repositories;
+
 using Dapper;
+
 using Domain.Orders;
 using Domain.Orders.ValueObjects;
+
 using Migrations.Tables.FreelanceBurses;
 using Migrations.Tables.Orders;
 
@@ -27,24 +31,27 @@ namespace Infrastructure.Orders.Repositories
             {
                 return;
             }
-            
+
             using (IDbConnection connection = _connectionFactory.BuildConnection())
             {
-                string query = $@"
+                var query = @"
                     insert into ""Orders""
                     (""Title"", ""Description"", ""Link"", ""Publication"", ""FreelanceBurseId"", ""Status"")
                     values(@title, @description, @link, @publication, @freelanceBurseId, @status)
                     on conflict (""Link"") do nothing";
 
-                await connection.ExecuteAsync(query, orders.Select(p => new
-                {
-                    title = p.Body.Title,
-                    description = p.Body.Description,
-                    link = p.Body.Link.ToString(),
-                    publication = p.Body.Publication,
-                    freelanceBurseId,
-                    status = ProcessingStatus.New.ToString()
-                }));
+                await connection.ExecuteAsync(
+                    query,
+                    orders.Select(
+                        p => new
+                        {
+                            title = p.Body.Title,
+                            description = p.Body.Description,
+                            link = p.Body.Link.ToString(),
+                            publication = p.Body.Publication,
+                            freelanceBurseId,
+                            status = ProcessingStatus.New.ToString()
+                        }));
             }
         }
 
@@ -68,18 +75,24 @@ namespace Infrastructure.Orders.Repositories
                     join ""FreelanceBurses"" fb on cte.""FreelanceBurseId"" = fb.""Id""
                 ";
 
-                var result = await connection.QueryAsync<OrderEntity, FreelanceBurseEntity, OrderEntity>(query, (o, fb) =>
+                IEnumerable<OrderEntity> result = await connection.QueryAsync<OrderEntity, FreelanceBurseEntity, OrderEntity>(
+                    query,
+                    (o, fb) =>
                     {
                         o.FreelanceBurse = fb;
+
                         return o;
                     });
 
-                return result.Select(p =>
-                {
-                    var body = new OrderBody(p.Title, p.Description, new Uri(p.Link), p.Publication);
-                    var burse = new FreelanceBurse(p.FreelanceBurseId, new Uri(p.FreelanceBurse.Link), p.FreelanceBurse.Name);
-                    return new Order(body, burse);
-                }).ToArray();
+                return result.Select(
+                        p =>
+                        {
+                            var body = new OrderBody(p.Title, p.Description, new Uri(p.Link), p.Publication);
+                            var burse = new FreelanceBurse(p.FreelanceBurseId, new Uri(p.FreelanceBurse.Link), p.FreelanceBurse.Name);
+
+                            return new Order(body, burse);
+                        })
+                    .ToArray();
             }
         }
 
@@ -89,7 +102,7 @@ namespace Infrastructure.Orders.Repositories
             {
                 return;
             }
-            
+
             using (IDbConnection connection = _connectionFactory.BuildConnection())
             {
                 string query = $@"
@@ -98,7 +111,8 @@ namespace Infrastructure.Orders.Repositories
                     where ""Link"" = ANY(@links)
                 ";
 
-                await connection.ExecuteAsync(query, 
+                await connection.ExecuteAsync(
+                    query,
                     new
                     {
                         links = links.Select(p => p.ToString()).ToArray()

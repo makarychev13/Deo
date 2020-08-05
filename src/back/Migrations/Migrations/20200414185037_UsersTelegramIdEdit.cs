@@ -7,17 +7,17 @@ namespace Migrations.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateIndex(
-                name: "IX_Users_TelegramId",
-                table: "Users",
-                column: "TelegramId",
+                "IX_Users_TelegramId",
+                "Users",
+                "TelegramId",
                 unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropIndex(
-                name: "IX_Users_TelegramId",
-                table: "Users");
+                "IX_Users_TelegramId",
+                "Users");
         }
     }
 }

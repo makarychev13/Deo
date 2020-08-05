@@ -1,7 +1,9 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Confluent.Kafka;
+
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
@@ -21,15 +23,17 @@ namespace Common.Kafka.Consumer
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             return Task.Factory.StartNew(
-                () => ExecuteCore(stoppingToken),
-                stoppingToken,
-                TaskCreationOptions.LongRunning,
-                TaskScheduler.Current).ContinueWith(p => { throw p.Exception; }, TaskContinuationOptions.OnlyOnFaulted);
+                    () => ExecuteCore(stoppingToken),
+                    stoppingToken,
+                    TaskCreationOptions.LongRunning,
+                    TaskScheduler.Current)
+                .ContinueWith(p => { ExecuteCore(stoppingToken); }, TaskContinuationOptions.OnlyOnFaulted);
         }
 
         public void ExecuteCore(CancellationToken stoppingToken)
         {
-            var builder = new ConsumerBuilder<TK, TV>(_config).SetValueDeserializer(new KafkaDeserializer<TV>());
+            ConsumerBuilder<TK, TV> builder = new ConsumerBuilder<TK, TV>(_config).SetValueDeserializer(new KafkaDeserializer<TV>());
+
             using (IConsumer<TK, TV> consumer = builder.Build())
             {
                 if (_config.Active)
@@ -39,12 +43,14 @@ namespace Common.Kafka.Consumer
                     while (!stoppingToken.IsCancellationRequested)
                     {
                         ConsumeResult<TK, TV> result = consumer.Consume(TimeSpan.FromMilliseconds(1000));
+
                         if (result != null)
                         {
                             _handler.HandleAsync(result.Key, result.Value).GetAwaiter().GetResult();
+                            consumer.Commit(result);
                             consumer.StoreOffset(result);
-                        } 
-                    }   
+                        }
+                    }
                 }
             }
         }

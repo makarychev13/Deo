@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
+
 using Confluent.Kafka;
+
 using Microsoft.Extensions.Options;
 
 namespace Common.Kafka.Producer
@@ -23,7 +25,7 @@ namespace Common.Kafka.Producer
 
         public async Task ProduceAsync(Tk key, Tv value)
         {
-            await _producer.ProduceAsync(GetTopic(key, value), new Message<Tk, Tv> {Key = key, Value = value});
+            await _producer.ProduceAsync(GetTopic(key, value), new Message<Tk, Tv> { Key = key, Value = value });
         }
 
         public virtual string GetTopic(Tk key, Tv value)

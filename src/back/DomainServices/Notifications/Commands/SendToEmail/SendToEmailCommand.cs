@@ -1,9 +1,10 @@
 ﻿using Domain.Notifications;
+
 using MediatR;
 
 namespace DomainServices.Notifications.Commands.SendToEmail
 {
-    public sealed class SendToEmailCommand : INotification
+    public sealed class SendToEmailCommand : IRequest
     {
         public readonly Message Message;
 

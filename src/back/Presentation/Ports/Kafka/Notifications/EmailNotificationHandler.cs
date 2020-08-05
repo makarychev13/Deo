@@ -1,7 +1,10 @@
 ﻿using System.Threading.Tasks;
+
 using Common.Kafka.Consumer;
+
 using DomainServices.Notifications.Commands.SendToEmail;
 using DomainServices.Notifications.Kafka.Contracts;
+
 using MediatR;
 
 namespace Presentation.Ports.Kafka.Notifications
@@ -17,7 +20,7 @@ namespace Presentation.Ports.Kafka.Notifications
 
         public async Task HandleAsync(string key, EmailNotification value)
         {
-            await _mediator.Publish(new SendToEmailCommand(value.Message));
+            await _mediator.Send(new SendToEmailCommand(value.Message));
         }
     }
 }

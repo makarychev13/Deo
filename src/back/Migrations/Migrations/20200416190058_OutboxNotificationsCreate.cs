@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Migrations.Migrations
@@ -8,26 +9,22 @@ namespace Migrations.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "OutboxNotifications",
-                columns: table => new
+                "OutboxNotifications",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     IdempotencyKey = table.Column<string>(nullable: true),
-                    Data = table.Column<string>(type: "json", nullable: false),
+                    Data = table.Column<string>("json", nullable: false),
                     Transport = table.Column<string>(nullable: false),
                     Status = table.Column<string>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OutboxNotifications", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_OutboxNotifications", x => x.Id); });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "OutboxNotifications");
+            migrationBuilder.DropTable("OutboxNotifications");
         }
     }
 }

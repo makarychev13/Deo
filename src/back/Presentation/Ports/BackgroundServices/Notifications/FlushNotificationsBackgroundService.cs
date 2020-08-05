@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
+
 using Common.HostedServices;
+
 using DomainServices.Notifications.Commands.FlushNotifications;
+
 using MediatR;
 
 namespace Infrastructure.Notifications.BackgroundServices
@@ -15,11 +18,11 @@ namespace Infrastructure.Notifications.BackgroundServices
             _mediator = mediator;
         }
 
+        protected override TimeSpan Period => TimeSpan.FromMinutes(1);
+
         protected override async Task ExecuteAsync()
         {
-            await _mediator.Publish(new FlushNotificationsCommand());
+            await _mediator.Send(new FlushNotificationsCommand());
         }
-
-        protected override TimeSpan Period => TimeSpan.FromMinutes(1);
     }
 }

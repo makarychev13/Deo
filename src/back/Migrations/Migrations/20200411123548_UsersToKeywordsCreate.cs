@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Migrations.Migrations
@@ -11,8 +12,8 @@ namespace Migrations.Migrations
                 .OldAnnotation("Npgsql:Enum:subscriptions", "email,vk");
 
             migrationBuilder.CreateTable(
-                name: "UsersToKeywords",
-                columns: table => new
+                "UsersToKeywords",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
@@ -24,34 +25,33 @@ namespace Migrations.Migrations
                 {
                     table.PrimaryKey("PK_UsersToKeywords", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UsersToKeywords_Keywords_KeywordId",
-                        column: x => x.KeywordId,
-                        principalTable: "Keywords",
-                        principalColumn: "Id",
+                        "FK_UsersToKeywords_Keywords_KeywordId",
+                        x => x.KeywordId,
+                        "Keywords",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UsersToKeywords_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
+                        "FK_UsersToKeywords_Users_UserId",
+                        x => x.UserId,
+                        "Users",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersToKeywords_KeywordId",
-                table: "UsersToKeywords",
-                column: "KeywordId");
+                "IX_UsersToKeywords_KeywordId",
+                "UsersToKeywords",
+                "KeywordId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersToKeywords_UserId",
-                table: "UsersToKeywords",
-                column: "UserId");
+                "IX_UsersToKeywords_UserId",
+                "UsersToKeywords",
+                "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "UsersToKeywords");
+            migrationBuilder.DropTable("UsersToKeywords");
 
             migrationBuilder.AlterDatabase()
                 .Annotation("Npgsql:Enum:subscriptions", "email,vk");

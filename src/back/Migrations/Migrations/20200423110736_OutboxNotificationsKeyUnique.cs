@@ -7,30 +7,30 @@ namespace Migrations.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "IdempotencyKey",
-                table: "OutboxNotifications",
+                "IdempotencyKey",
+                "OutboxNotifications",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "text",
                 oldNullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_OutboxNotifications_IdempotencyKey",
-                table: "OutboxNotifications",
-                column: "IdempotencyKey",
+                "IX_OutboxNotifications_IdempotencyKey",
+                "OutboxNotifications",
+                "IdempotencyKey",
                 unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropIndex(
-                name: "IX_OutboxNotifications_IdempotencyKey",
-                table: "OutboxNotifications");
+                "IX_OutboxNotifications_IdempotencyKey",
+                "OutboxNotifications");
 
             migrationBuilder.AlterColumn<string>(
-                name: "IdempotencyKey",
-                table: "OutboxNotifications",
-                type: "text",
+                "IdempotencyKey",
+                "OutboxNotifications",
+                "text",
                 nullable: true,
                 oldClrType: typeof(string));
         }

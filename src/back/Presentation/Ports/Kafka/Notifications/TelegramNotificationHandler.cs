@@ -1,7 +1,10 @@
 ﻿using System.Threading.Tasks;
+
 using Common.Kafka.Consumer;
+
 using DomainServices.Notifications.Commands.SendToTelegram;
 using DomainServices.Notifications.Kafka.Contracts;
+
 using MediatR;
 
 namespace Presentation.Ports.Kafka.Notifications
@@ -17,7 +20,7 @@ namespace Presentation.Ports.Kafka.Notifications
 
         public async Task HandleAsync(string key, TelegramNotification value)
         {
-            await _mediator.Publish(new SendToTelegramCommand(value.Message));
+            await _mediator.Send(new SendToTelegramCommand(value.Message));
         }
     }
 }

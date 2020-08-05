@@ -2,8 +2,7 @@
 
 namespace DomainServices.Orders.Commands.FlushOrders
 {
-    public sealed class FlushOrdersCommand : INotification
+    public sealed class FlushOrdersCommand : IRequest
     {
-        
     }
 }

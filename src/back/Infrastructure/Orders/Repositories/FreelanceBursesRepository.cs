@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Common.Repositories;
+
 using Dapper;
+
 using Domain.Orders.ValueObjects;
+
 using Migrations.Tables.FreelanceBurses;
 
 namespace Infrastructure.Orders.Repositories
@@ -22,11 +27,12 @@ namespace Infrastructure.Orders.Repositories
         {
             using (IDbConnection connection = _connectionFactory.BuildConnection())
             {
-                string query = $@"
+                var query = @"
                     select ""Id"", ""Name"", ""Link""
                     from ""FreelanceBurses""";
 
-                var result = await connection.QueryAsync<FreelanceBurseEntity>(query);
+                IEnumerable<FreelanceBurseEntity> result = await connection.QueryAsync<FreelanceBurseEntity>(query);
+
                 return result.Select(p => new FreelanceBurse(p.Id, new Uri(p.Link), p.Name)).ToArray();
             }
         }

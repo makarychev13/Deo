@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using Domain.Notifications;
 using Domain.Orders;
 using Domain.Users;
@@ -9,11 +10,11 @@ namespace Infrastructure.Notifications
     {
         public Dictionary<Subscriptions, List<Message>> Create(User[] users, Order order)
         {
-            var messages = new Dictionary<Subscriptions, List<Message>>()
+            var messages = new Dictionary<Subscriptions, List<Message>>
             {
-                {Subscriptions.Email, new List<Message>()},
-                {Subscriptions.Telegram, new List<Message>()},
-                {Subscriptions.Vk, new List<Message>()}
+                { Subscriptions.Email, new List<Message>() },
+                { Subscriptions.Telegram, new List<Message>() },
+                { Subscriptions.Vk, new List<Message>() }
             };
 
             foreach (var user in users)

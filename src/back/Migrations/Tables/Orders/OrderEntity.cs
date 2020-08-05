@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Migrations.Tables.FreelanceBurses;
 
 namespace Migrations.Tables.Orders
@@ -13,7 +14,7 @@ namespace Migrations.Tables.Orders
         public int FreelanceBurseId { get; set; }
         public ProcessingStatus Status { get; set; }
         public DateTime LastModificationDate { get; set; }
-        
+
         public FreelanceBurseEntity FreelanceBurse { get; set; }
     }
 }

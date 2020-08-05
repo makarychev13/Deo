@@ -1,7 +1,10 @@
 ﻿using System;
+
 using Domain.Notifications;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Migrations.Tables.Orders;
 
 namespace Migrations.Tables.Users
@@ -20,9 +23,12 @@ namespace Migrations.Tables.Users
 
             builder.Property(p => p.PasswordHash).IsRequired();
 
-            builder.Property(p => p.Subscriptions).IsRequired().HasConversion(
-                p => p.ToString(),
-                p => (Subscriptions)Enum.Parse(typeof(ProcessingStatus), p));;
+            builder.Property(p => p.Subscriptions)
+                .IsRequired()
+                .HasConversion(
+                    p => p.ToString(),
+                    p => (Subscriptions)Enum.Parse(typeof(ProcessingStatus), p));
+            ;
         }
     }
 }

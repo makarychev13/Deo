@@ -2,10 +2,15 @@
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Common.Repositories;
+
 using Dapper;
+
 using Domain.Notifications;
+
 using Migrations.Tables.OutboxNotifications;
+
 using Newtonsoft.Json;
 
 namespace Infrastructure.Notifications.Repositories
@@ -21,7 +26,7 @@ namespace Infrastructure.Notifications.Repositories
 
         public async Task SaveToPush(IDictionary<Subscriptions, List<Message>> events, string orderLink)
         {
-            string sql = $@"
+            var sql = @"
                 insert into ""OutboxNotifications""
                 (""IdempotencyKey"", ""Data"", ""Transport"", ""Status"")
                 values(@key, @data, @subscriptions, @status)
@@ -33,18 +38,20 @@ namespace Infrastructure.Notifications.Repositories
                 {
                     foreach (Message message in @event.Value)
                     {
-                        await connection.ExecuteAsync(sql, new
-                        {
-                            key = $"{@event.Key}_{orderLink}_{message.To}".ToLower(),
-                            data = JsonConvert.SerializeObject(message, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All }),
-                            subscriptions = @event.Key.ToString(),
-                            status = OutboxNotificationsStatusEntity.New.ToString()
-                        });   
+                        await connection.ExecuteAsync(
+                            sql,
+                            new
+                            {
+                                key = $"{@event.Key}_{orderLink}_{message.To}".ToLower(),
+                                data = JsonConvert.SerializeObject(message, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }),
+                                subscriptions = @event.Key.ToString(),
+                                status = OutboxNotificationsStatusEntity.New.ToString()
+                            });
                     }
                 }
             }
         }
-        
+
         public async Task<Notification[]> GetUnhandled()
         {
             string sql = $@"
@@ -63,14 +70,17 @@ namespace Infrastructure.Notifications.Repositories
 
             using (IDbConnection connection = _connectionFactory.BuildConnection())
             {
-                var result = await connection.QueryAsync<OutboxNotificationEntity>(sql);
+                IEnumerable<OutboxNotificationEntity> result = await connection.QueryAsync<OutboxNotificationEntity>(sql);
 
                 return result
-                    .Select(p =>
-                    {
-                        Message message = (Message)JsonConvert.DeserializeObject(p.Data, new JsonSerializerSettings() {TypeNameHandling = TypeNameHandling.All});
-                        return new Notification(p.Id, p.Transport, message);
-                    }).ToArray();
+                    .Select(
+                        p =>
+                        {
+                            var message = (Message)JsonConvert.DeserializeObject(p.Data, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
+
+                            return new Notification(p.Id, p.Transport, message);
+                        })
+                    .ToArray();
             }
         }
 

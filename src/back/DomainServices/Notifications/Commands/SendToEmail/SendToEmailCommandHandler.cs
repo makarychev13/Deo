@@ -1,11 +1,12 @@
 ﻿using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
+
 using MediatR;
 
 namespace DomainServices.Notifications.Commands.SendToEmail
 {
-    internal sealed class SendToEmailCommandHandler : INotificationHandler<SendToEmailCommand>
+    internal sealed class SendToEmailCommandHandler : AsyncRequestHandler<SendToEmailCommand>
     {
         private readonly SmtpClient _smtpClient;
 
@@ -14,7 +15,7 @@ namespace DomainServices.Notifications.Commands.SendToEmail
             _smtpClient = smtpClient;
         }
 
-        public async Task Handle(SendToEmailCommand request, CancellationToken cancellationToken)
+        protected override async Task Handle(SendToEmailCommand request, CancellationToken cancellationToken)
         {
             var eMailMessage = new MailMessage("makar.tula@gmail.com", request.Message.To)
             {
@@ -22,8 +23,8 @@ namespace DomainServices.Notifications.Commands.SendToEmail
                 Body = request.Message.Body,
                 IsBodyHtml = true
             };
-            
-            using (eMailMessage) 
+
+            using (eMailMessage)
             {
                 _smtpClient.Send(eMailMessage);
             }

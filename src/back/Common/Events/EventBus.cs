@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+
 using Common.Kafka.Producer;
 
 namespace Common.Events

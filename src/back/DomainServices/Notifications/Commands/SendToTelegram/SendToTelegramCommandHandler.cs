@@ -1,13 +1,15 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+
 using MediatR;
+
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types.Enums;
 
 namespace DomainServices.Notifications.Commands.SendToTelegram
 {
-    public sealed class SendToTelegramCommandHandler : INotificationHandler<SendToTelegramCommand>
+    public sealed class SendToTelegramCommandHandler : AsyncRequestHandler<SendToTelegramCommand>
     {
         private readonly ITelegramBotClient _bot;
 
@@ -16,7 +18,7 @@ namespace DomainServices.Notifications.Commands.SendToTelegram
             _bot = bot;
         }
 
-        public async Task Handle(SendToTelegramCommand request, CancellationToken cancellationToken)
+        protected override async Task Handle(SendToTelegramCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -24,7 +26,6 @@ namespace DomainServices.Notifications.Commands.SendToTelegram
             }
             catch (ApiRequestException err) when (err.ErrorCode == 403)
             {
-                
             }
         }
     }
