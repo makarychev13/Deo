@@ -1,4 +1,7 @@
 using System;
+using System.Reflection;
+
+using DbUp;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -47,21 +50,18 @@ namespace Presentation
 
         private void MigrationApply(string connectionString, ILogger logger)
         {
-            try
-            {
-                var cnx = new NpgsqlConnection(connectionString);
-                var evolve = new Evolve.Evolve(cnx, msg => logger.LogInformation(msg))
-                {
-                    Locations = new[] { "../Migrations" },
-                    IsEraseDisabled = true
-                };
+            var upgrader =
+                DeployChanges.To
+                    .PostgresqlDatabase(connectionString)
+                    .WithScriptsFromFileSystem("../Migrations/Scripts")
+                    .LogToConsole()
+                    .Build();
 
-                evolve.Migrate();
-            }
-            catch (Exception ex)
+            var result = upgrader.PerformUpgrade();
+
+            if (!result.Successful)
             {
-                logger.LogCritical("Не удалось запустить миграцию.", ex);
-                throw;
+                logger.LogError("Не удалось накатить миграции", result.Error);
             }
         }
     }
