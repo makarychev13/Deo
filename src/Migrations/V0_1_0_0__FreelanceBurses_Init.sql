@@ -1,5 +1,5 @@
-﻿create table if not exists "FreelanceBurse" (
+﻿create table if not exists "FreelanceBurses" (
     Id int not null primary key,
-    Name text not null,
-    Link text not null
+    Name text unique not null,
+    Link text unique not null
 )
