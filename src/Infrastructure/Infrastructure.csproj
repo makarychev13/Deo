@@ -15,4 +15,10 @@
         <PackageReference Include="MediatR" Version="8.0.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Common\Kafka\Consumers" />
+      <Folder Include="Common\Kafka\Producers" />
+      <Folder Include="Orders\Repositories\Contracts" />
+    </ItemGroup>
+
 </Project>
