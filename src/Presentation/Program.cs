@@ -7,8 +7,12 @@ namespace Presentation
     {
         public static void Main(string[] args)
         {
-            Host
-                .CreateDefaultBuilder(args)
+            CreateWebHostBuilder(args).Build().Run();
+        }
+
+        public static IHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
         }
     }
