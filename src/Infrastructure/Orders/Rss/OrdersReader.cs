@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -7,9 +8,9 @@ using Domain.Orders.ValueObjects;
 
 namespace Infrastructure.Orders.Rss
 {
-    public sealed class OrdersParser
+    public sealed class OrdersReader
     {
-        public Order[] GetFrom(FreelanceBurse burse)
+        public IEnumerable<Order> GetFrom(FreelanceBurse burse)
         {
             return XDocument.Load(burse.Link.ToString())
                 .Elements("rss")

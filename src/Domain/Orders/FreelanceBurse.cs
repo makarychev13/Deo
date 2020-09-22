@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.Orders.ValueObjects
+namespace Domain.Orders
 {
     public sealed class FreelanceBurse
     {
