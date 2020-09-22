@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Dapper;
@@ -20,13 +21,13 @@ namespace Infrastructure.Orders.Repositories.FreelanceBurse
             _connectionFactory = connectionFactory;
         }
 
-        public async Task<IEnumerable<Domain.Orders.FreelanceBurse>> GetAll()
+        public async Task<IEnumerable<Domain.Orders.FreelanceBurse>> GetAll(CancellationToken token)
         {
             using IDbConnection connection = _connectionFactory.BuildConnection();
 
             var query = @"select ""Id"", ""Name"", ""Link"" from ""FreelanceBurses""";
 
-            IEnumerable<FreelanceBurseEntity> result = await connection.QueryAsync<FreelanceBurseEntity>(query);
+            IEnumerable<FreelanceBurseEntity> result = await connection.QueryAsync<FreelanceBurseEntity>(new CommandDefinition(query, cancellationToken: token));
 
             return result.Select(p => new Domain.Orders.FreelanceBurse(p.Id, new Uri(p.Link), p.Name)).ToArray();
         }

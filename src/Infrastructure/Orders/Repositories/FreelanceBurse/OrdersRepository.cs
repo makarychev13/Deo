@@ -32,18 +32,18 @@ namespace Infrastructure.Orders.Repositories.FreelanceBurse
                     values(@title, @description, @link, @publication, @freelanceBurseId, @status)
                     on conflict (""Link"") do nothing";
 
-            await connection.ExecuteAsync(
-                query,
-                orders.Select(
-                    p => new
-                    {
-                        title = p.Body.Title,
-                        description = p.Body.Description,
-                        link = p.Body.Link.ToString(),
-                        publication = p.Body.Publication,
-                        freelanceBurseId,
-                        status = ProcessingStatusEntity.New.ToString()
-                    }));
+            var param = orders.Select(
+                p => new
+                {
+                    title = p.Body.Title,
+                    description = p.Body.Description,
+                    link = p.Body.Link.ToString(),
+                    publication = p.Body.Publication,
+                    freelanceBurseId,
+                    status = ProcessingStatusEntity.New.ToString()
+                });
+
+            await connection.ExecuteAsync(new CommandDefinition(query, param, cancellationToken: token));
         }
     }
 }

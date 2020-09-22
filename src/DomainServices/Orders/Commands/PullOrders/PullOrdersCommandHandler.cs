@@ -26,7 +26,7 @@ namespace DomainServices.Orders.Commands.PullOrders
 
         protected override async Task Handle(PullOrdersCommand request, CancellationToken cancellationToken)
         {
-            IEnumerable<FreelanceBurse> burses = await _freelanceBurseRepository.GetAll();
+            IEnumerable<FreelanceBurse> burses = await _freelanceBurseRepository.GetAll(cancellationToken);
 
             foreach (FreelanceBurse burse in burses)
             {
